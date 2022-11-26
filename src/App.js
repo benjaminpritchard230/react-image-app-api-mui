@@ -9,6 +9,9 @@ import axios from "axios";
 import ButtonAppBar from "./components/ButtonAppBar";
 import PostCard from "./components/PostCard";
 import { useSelector, useDispatch } from "react-redux";
+import Login from "./components/Login";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Register from "./components/Register";
 
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
@@ -82,15 +85,19 @@ function App() {
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <CssBaseline />
-      <Box sx={{ flexGrow: 1, minWidth: 1 }} key="1">
-        <Grid container spacing={0}>
-          <Grid item xs={12}>
-            <ButtonAppBar />
+      <Router>
+        <ButtonAppBar />
+        <Box sx={{ flexGrow: 1, minWidth: 1 }} key="1">
+          <Grid container spacing={0}>
+            <Grid item xs={12}></Grid>
+            <Routes>
+              <Route path={"/"} element={displayImagePosts()} />
+              <Route path={"/login"} element={<Login />} />
+              <Route path={"/register"} element={<Register />} />
+            </Routes>
           </Grid>
-
-          {displayImagePosts()}
-        </Grid>
-      </Box>
+        </Box>
+      </Router>
     </ThemeProvider>
   );
 }

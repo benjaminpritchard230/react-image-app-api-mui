@@ -7,11 +7,13 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useSelector, useDispatch } from "react-redux";
-import { update } from "../features/user/userSlice";
+import { updateUsername, updateToken } from "../features/user/userSlice";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function ButtonAppBar() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -26,28 +28,37 @@ export default function ButtonAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1 }}
+            onClick={() => {
+              navigate("/");
+            }}
+          >
             Image App
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {user.username}
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            {user.token}
+          </Typography>
           <Button
             onClick={() => {
-              dispatch(update("hprit"));
+              navigate("/login");
             }}
             color="inherit"
           >
-            Hprit
+            Login
           </Button>
           <Button
             onClick={() => {
-              dispatch(update(""));
+              navigate("/register");
             }}
             color="inherit"
           >
-            clear
+            Register
           </Button>
         </Toolbar>
       </AppBar>
