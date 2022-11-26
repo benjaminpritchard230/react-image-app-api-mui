@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import axios from "axios";
 import ButtonAppBar from "./components/ButtonAppBar";
 import PostCard from "./components/PostCard";
+import { useSelector, useDispatch } from "react-redux";
 
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
@@ -26,6 +27,9 @@ function App() {
       },
     },
   });
+
+  const user = useSelector((state) => state.user);
+  console.log(user.username);
 
   const token = "9c7fb538e128868c75cb66d7087fd98f6524864d";
   const postsUrl = "http://localhost:8000/all_posts/";
