@@ -15,10 +15,15 @@ export const userSlice = createSlice({
       const { payload } = param;
       state.token = payload;
     },
+    clearUser: (state, param) => {
+      const { payload } = param;
+      state.username = payload;
+      state.token = payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateUsername, updateToken } = userSlice.actions;
+export const { updateUsername, updateToken, clearUser } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Login from "./components/Login";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Register from "./components/Register";
+import PublicPosts from "./components/PublicPosts";
 
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
@@ -32,55 +33,9 @@ function App() {
   });
 
   const user = useSelector((state) => state.user);
-  console.log(user.username);
-
   const token = user.token;
-  const postsUrl = "http://localhost:8000/all_posts/";
   const [postList, setPostList] = useState([]);
   const theme = "light";
-
-  const urlList = {};
-
-  const updatePosts = () => {
-    if (token.length > 0) {
-      axios
-        .get(postsUrl, {
-          headers: {
-            Authorization: `token ${token}`,
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-          setPostList(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => {});
-    } else {
-      setPostList([]);
-    }
-  };
-
-  useEffect(() => {
-    updatePosts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
-
-  // useEffect(() => {
-  //   const filtered = taskList.filter((task) => {
-  //     return task.name.toLowerCase().includes(filterText.toLowerCase());
-  //   });
-  //   setFilteredTaskList(filtered);
-  // }, [filterText, taskList]);
-
-  const displayImagePosts = () => {
-    if (token.length > 0) {
-      return postList.map((post) => (
-        <PostCard post={post} updatePosts={updatePosts} key={post.id} />
-      ));
-    }
-  };
 
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
@@ -91,7 +46,7 @@ function App() {
           <Grid container spacing={0}>
             <Grid item xs={12}></Grid>
             <Routes>
-              <Route path={"/"} element={displayImagePosts()} />
+              <Route path={"/"} element={<PublicPosts />} />
               <Route path={"/login"} element={<Login />} />
               <Route path={"/register"} element={<Register />} />
             </Routes>
