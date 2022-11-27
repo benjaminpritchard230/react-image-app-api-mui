@@ -13,6 +13,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
+import { updateUsername, updateToken } from "../features/user/userSlice";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 
 function Copyright(props) {
   return (
@@ -35,13 +39,30 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    axios
+      .post("http://localhost:8000/login/", {
+        username: data.get("username"),
+        password: data.get("password"),
+      })
+      .then((response) => {
+        console.log(response.data);
+        dispatch(updateUsername(data.get("username")));
+        dispatch(updateToken(response.data.token));
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        navigate("/");
+      });
   };
 
   return (
@@ -72,10 +93,10 @@ export default function Login() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
               autoFocus
             />
             <TextField

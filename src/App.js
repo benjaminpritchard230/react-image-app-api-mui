@@ -34,7 +34,7 @@ function App() {
   const user = useSelector((state) => state.user);
   console.log(user.username);
 
-  const token = "9c7fb538e128868c75cb66d7087fd98f6524864d";
+  const token = user.token;
   const postsUrl = "http://localhost:8000/all_posts/";
   const [postList, setPostList] = useState([]);
   const theme = "light";
