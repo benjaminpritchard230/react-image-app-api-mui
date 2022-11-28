@@ -7,6 +7,8 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useSelector, useDispatch } from "react-redux";
+import Avatar from "@mui/material/Avatar";
+
 import {
   updateUsername,
   updateToken,
@@ -50,14 +52,24 @@ export default function ButtonAppBar() {
             {user.token}
           </Typography>
           {token.length > 0 ? (
-            <Button
-              onClick={() => {
-                dispatch(clearUser(""));
-              }}
-              color="inherit"
-            >
-              Logout
-            </Button>
+            <>
+              <Button
+                onClick={() => {
+                  navigate("/private");
+                }}
+                color="inherit"
+              >
+                Private
+              </Button>
+              <Button
+                onClick={() => {
+                  dispatch(clearUser(""));
+                }}
+                color="inherit"
+              >
+                Logout
+              </Button>
+            </>
           ) : (
             <>
               <Button
@@ -78,6 +90,7 @@ export default function ButtonAppBar() {
               </Button>
             </>
           )}
+          <Avatar alt={user.username} src="/static/images/avatar/2.jpg" />
         </Toolbar>
       </AppBar>
     </Box>

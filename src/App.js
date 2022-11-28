@@ -13,6 +13,8 @@ import Login from "./components/Login";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Register from "./components/Register";
 import PublicPosts from "./components/PublicPosts";
+import ResponsiveAppBar from "./components/ButtonAppBarProfile";
+import PrivatePosts from "./components/PrivatePosts";
 
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
@@ -47,6 +49,7 @@ function App() {
             <Grid item xs={12}></Grid>
             <Routes>
               <Route path={"/"} element={<PublicPosts />} />
+              <Route path={"/private"} element={<PrivatePosts />} />
               <Route path={"/login"} element={<Login />} />
               <Route path={"/register"} element={<Register />} />
             </Routes>
