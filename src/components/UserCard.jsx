@@ -20,7 +20,7 @@ const bull = (
 
 export default function UserCard() {
   const { id } = useParams();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
   const userUrl = `http://localhost:8000/user/${id}/`;
 
   const updateUser = () => {
