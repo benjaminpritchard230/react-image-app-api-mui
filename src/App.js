@@ -15,6 +15,7 @@ import Register from "./components/Register";
 import PublicPosts from "./components/PublicPosts";
 import ResponsiveAppBar from "./components/ButtonAppBarProfile";
 import PrivatePosts from "./components/PrivatePosts";
+import UserCard from "./components/UserCard";
 
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
@@ -52,6 +53,7 @@ function App() {
               <Route path={"/private"} element={<PrivatePosts />} />
               <Route path={"/login"} element={<Login />} />
               <Route path={"/register"} element={<Register />} />
+              <Route path={"/user/:id"} element={<UserCard />} />
             </Routes>
           </Grid>
         </Box>
