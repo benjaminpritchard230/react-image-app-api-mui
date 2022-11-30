@@ -11,6 +11,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import PostCardButtons from "./PostCardButtons";
+import Link from "@mui/material/Link";
+import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
 
 export default function PostCard({ post, updatePosts }) {
   const Item = styled(Paper)(({ theme }) => ({
@@ -23,27 +25,10 @@ export default function PostCard({ post, updatePosts }) {
 
   const token = "9c7fb538e128868c75cb66d7087fd98f6524864d";
   const likeUrl = "";
+  const userUrl = `user/${post.user}/`;
   const capitalizeString = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
-
-  //   const handleDeleteClick = () => {
-  //     axios
-  //       .delete(urlList.posts + `${post.id}/`, {
-  //         headers: {
-  //           Authorization: `token ${token}`,
-  //         },
-  //       })
-  //       .then((response) => {
-  //         console.log(response.data);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       })
-  //       .finally(() => {
-  //         updateposts();
-  //       });
-  //   };
 
   const handleLikeClick = () => {
     axios
@@ -95,6 +80,13 @@ export default function PostCard({ post, updatePosts }) {
           <CardContent sx={{ minHeight: 150 }}>
             <Typography variant="body2" color="text.secondary">
               {post.caption}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Posted by{" "}
+              <Link component={RouterLink} to={userUrl} variant="body2">
+                {post.author}
+              </Link>{" "}
+              at {post.created_on}
             </Typography>
           </CardContent>
           <CardActions>
