@@ -13,6 +13,8 @@ import { useContext } from "react";
 import PostCardButtons from "./PostCardButtons";
 import Link from "@mui/material/Link";
 import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
+import LikeButton from "./LikeButton";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function PostCard({ post, updatePosts }) {
   const Item = styled(Paper)(({ theme }) => ({
@@ -23,8 +25,9 @@ export default function PostCard({ post, updatePosts }) {
     color: theme.palette.text.secondary,
   }));
 
-  const token = "9c7fb538e128868c75cb66d7087fd98f6524864d";
-  const likeUrl = "";
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const token = user.token;
   const userUrl = `user/${post.user}/`;
   const capitalizeString = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -52,6 +55,7 @@ export default function PostCard({ post, updatePosts }) {
       });
   };
 
+  console.log(post.likes);
   return (
     <Grid
       item
@@ -90,7 +94,14 @@ export default function PostCard({ post, updatePosts }) {
             </Typography>
           </CardContent>
           <CardActions>
-            <PostCardButtons handleLikeClick={handleLikeClick} />
+            {/* <PostCardButtons post={post} handleLikeClick={handleLikeClick} /> */}
+            <LikeButton
+              post={post}
+              updatePosts={updatePosts}
+              handleLikeClick={handleLikeClick}
+              token={token}
+              username={user.username}
+            />
           </CardActions>
         </Card>
       </Item>

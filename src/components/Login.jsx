@@ -53,7 +53,7 @@ export default function Login() {
         password: data.get("password"),
       })
       .then((response) => {
-        console.log(response.data);
+        console.log(`${response.data} user data`);
         dispatch(updateUsername(data.get("username")));
         dispatch(updateToken(response.data.token));
       })
