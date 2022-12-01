@@ -49,6 +49,9 @@ export default function ButtonAppBar() {
             {user.username}
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            {user.id}
+          </Typography>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {user.token}
           </Typography>
           {token.length > 0 ? (

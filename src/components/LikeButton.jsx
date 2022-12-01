@@ -14,7 +14,7 @@ export default function LikeButton({ post, token, username, handleLikeClick }) {
       {token.length > 0 ? (
         <Chip
           icon={
-            post.likes.includes(1) ? (
+            post.likes.includes(user.id) ? (
               <FavoriteIcon color="error" />
             ) : (
               <FavoriteBorderIcon />

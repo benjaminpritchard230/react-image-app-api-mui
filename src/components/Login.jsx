@@ -13,7 +13,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
-import { updateUsername, updateToken } from "../features/user/userSlice";
+import {
+  updateUsername,
+  updateToken,
+  updateId,
+} from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
@@ -53,9 +57,10 @@ export default function Login() {
         password: data.get("password"),
       })
       .then((response) => {
-        console.log(`${response.data} user data`);
+        console.log(response.data);
         dispatch(updateUsername(data.get("username")));
         dispatch(updateToken(response.data.token));
+        dispatch(updateId(response.data.id));
       })
       .catch((error) => {
         console.log(error);

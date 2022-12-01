@@ -14,7 +14,7 @@ const PrivatePosts = () => {
   const user = useSelector((state) => state.user);
   const token = user.token;
   const navigate = useNavigate();
-  console.log(token);
+  // console.log(token);
 
   const postsUrl = "http://localhost:8000/my_posts/";
   const [postList, setPostList] = useState([]);

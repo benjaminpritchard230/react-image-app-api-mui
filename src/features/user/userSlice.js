@@ -5,6 +5,7 @@ export const userSlice = createSlice({
   initialState: {
     username: "",
     token: "",
+    id: null,
   },
   reducers: {
     updateUsername: (state, param) => {
@@ -15,6 +16,10 @@ export const userSlice = createSlice({
       const { payload } = param;
       state.token = payload;
     },
+    updateId: (state, param) => {
+      const { payload } = param;
+      state.id = payload;
+    },
     clearUser: (state, param) => {
       const { payload } = param;
       state.username = payload;
@@ -24,6 +29,7 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { updateUsername, updateToken, clearUser } = userSlice.actions;
+export const { updateUsername, updateToken, updateId, clearUser } =
+  userSlice.actions;
 
 export default userSlice.reducer;

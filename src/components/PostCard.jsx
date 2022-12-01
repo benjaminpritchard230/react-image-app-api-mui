@@ -55,7 +55,7 @@ export default function PostCard({ post, updatePosts }) {
       });
   };
 
-  console.log(post.likes);
+  // console.log(post.likes);
   return (
     <Grid
       item
