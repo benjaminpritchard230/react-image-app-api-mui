@@ -16,6 +16,8 @@ import PublicPosts from "./components/PublicPosts";
 import ResponsiveAppBar from "./components/ButtonAppBarProfile";
 import PrivatePosts from "./components/PrivatePosts";
 import UserCard from "./components/UserCard";
+import FloatingActionButtons from "./components/FloatingActionButtons";
+import NewPostDialog from "./components/NewPostDialog";
 
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
@@ -37,8 +39,41 @@ function App() {
 
   const user = useSelector((state) => state.user);
   const token = user.token;
-  const [postList, setPostList] = useState([]);
+  const [publicPostList, setPublicPostList] = useState([]);
+  const [privatePostList, setPrivatePostList] = useState([]);
+
   const theme = "light";
+  const [newPostDialog, setNewPostDialog] = useState(false);
+
+  const updatePrivatePosts = () => {
+    axios
+      .get("http://localhost:8000/my_posts/", {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setPrivatePostList(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {});
+  };
+
+  const updatePublicPosts = () => {
+    axios
+      .get("http://localhost:8000/all_posts/", {
+        headers: {},
+      })
+      .then((response) => {
+        console.log(response.data);
+        setPublicPostList(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {});
+  };
 
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
@@ -49,14 +84,37 @@ function App() {
           <Grid container spacing={0}>
             <Grid item xs={12}></Grid>
             <Routes>
-              <Route path={"/"} element={<PublicPosts />} />
-              <Route path={"/private"} element={<PrivatePosts />} />
+              <Route
+                path={"/"}
+                element={
+                  <PublicPosts
+                    publicPostList={publicPostList}
+                    updatePublicPosts={updatePublicPosts}
+                  />
+                }
+              />
+              <Route
+                path={"/private"}
+                element={
+                  <PrivatePosts
+                    privatePostList={privatePostList}
+                    updatePrivatePosts={updatePrivatePosts}
+                  />
+                }
+              />
               <Route path={"/login"} element={<Login />} />
               <Route path={"/register"} element={<Register />} />
               <Route path={"/user/:id"} element={<UserCard />} />
             </Routes>
           </Grid>
         </Box>
+        <FloatingActionButtons setNewPostDialog={setNewPostDialog} />
+        <NewPostDialog
+          newPostDialog={newPostDialog}
+          setNewPostDialog={setNewPostDialog}
+          updatePrivatePosts={updatePrivatePosts}
+          updatePublicPosts={updatePublicPosts}
+        />
       </Router>
     </ThemeProvider>
   );

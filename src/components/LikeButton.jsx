@@ -33,13 +33,6 @@ export default function LikeButton({ post, token, username, handleLikeClick }) {
           variant="outlined"
         />
       )}
-      <button
-        onClick={() => {
-          console.log(post.likers);
-        }}
-      >
-        Test likes
-      </button>
     </Stack>
   );
 }

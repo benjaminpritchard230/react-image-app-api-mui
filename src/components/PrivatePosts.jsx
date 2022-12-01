@@ -9,7 +9,7 @@ import {
 } from "../features/user/userSlice";
 import { useNavigate, Link } from "react-router-dom";
 
-const PrivatePosts = () => {
+const PrivatePosts = ({ updatePrivatePosts, privatePostList }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const token = user.token;
@@ -19,27 +19,17 @@ const PrivatePosts = () => {
   const postsUrl = "http://localhost:8000/my_posts/";
   const [postList, setPostList] = useState([]);
 
-  const updatePosts = () => {
-    axios
-      .get(postsUrl, {
-        headers: { Authorization: `Token ${token}` },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setPostList(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {});
-  };
   useEffect(() => {
-    updatePosts();
+    updatePrivatePosts();
   }, []);
 
   const displayImagePosts = () => {
-    return postList.map((post) => (
-      <PostCard post={post} updatePosts={updatePosts} key={post.id} />
+    return privatePostList.map((post) => (
+      <PostCard
+        post={post}
+        updatePrivatePosts={updatePrivatePosts}
+        key={post.id}
+      />
     ));
   };
   return <>{displayImagePosts()}</>;
