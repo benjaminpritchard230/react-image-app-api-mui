@@ -25,10 +25,6 @@ export default function NewPostDialog({
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState();
 
-  const handleChange = (e) => {
-    setImage(e.target[1].files[0]);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setNewPostDialog(false);
@@ -38,15 +34,17 @@ export default function NewPostDialog({
     axios
       .post(
         `http://localhost:8000/my_posts/`,
-        { caption: data.get("caption"), image_url: image },
+        { caption: data.get("caption"), image_url: data.get("image_url") },
         {
           headers: {
             Authorization: `token ${token}`,
+            "Content-Type": "multipart/form-data",
           },
         }
       )
       .then((response) => {
         console.log(response.data);
+        console.log(data.get("image_url"));
       })
       .catch((error) => {
         console.log(error);
@@ -77,13 +75,7 @@ export default function NewPostDialog({
               fullWidth
               variant="standard"
             />
-            <input
-              onChange={handleChange}
-              type="file"
-              id="image_url"
-              label="Image"
-              name="image_url"
-            />
+            <input type="file" id="image_url" label="Image" name="image_url" />
           </DialogContent>
           <DialogActions>
             <Button
