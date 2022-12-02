@@ -7,16 +7,17 @@ import axios from "axios";
 import { Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { useContext } from "react";
-import PostCardButtons from "./PostCardButtons";
 import Link from "@mui/material/Link";
 import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
 import LikeButton from "./LikeButton";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function PostCard({ post, updatePosts }) {
+export default function PostCard({
+  post,
+  updatePublicPosts,
+  updatePrivatePosts,
+}) {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -51,7 +52,8 @@ export default function PostCard({ post, updatePosts }) {
         console.log(error);
       })
       .finally(() => {
-        updatePosts();
+        updatePublicPosts();
+        updatePrivatePosts();
       });
   };
 
@@ -97,7 +99,6 @@ export default function PostCard({ post, updatePosts }) {
             {/* <PostCardButtons post={post} handleLikeClick={handleLikeClick} /> */}
             <LikeButton
               post={post}
-              updatePosts={updatePosts}
               handleLikeClick={handleLikeClick}
               token={token}
               username={user.username}

@@ -23,16 +23,22 @@ export default function NewPostDialog({
   const token = user.token;
 
   const [open, setOpen] = useState(false);
+  const [image, setImage] = useState();
+
+  const handleChange = (e) => {
+    setImage(e.target[1].files[0]);
+  };
 
   const handleSubmit = (e) => {
-    console.log(e);
     e.preventDefault();
     setNewPostDialog(false);
-    let caption = e.target[0].value;
+    // let caption = e.target[0].value;
+    // let image_url = e.target[1].files[0];
+    const data = new FormData(e.target);
     axios
       .post(
         `http://localhost:8000/my_posts/`,
-        { caption: caption },
+        { caption: data.get("caption"), image_url: image },
         {
           headers: {
             Authorization: `token ${token}`,
@@ -62,6 +68,7 @@ export default function NewPostDialog({
           <DialogContent>
             <DialogContentText></DialogContentText>
             <TextField
+              name="caption"
               autoFocus
               margin="dense"
               id="caption"
@@ -69,6 +76,13 @@ export default function NewPostDialog({
               type="text"
               fullWidth
               variant="standard"
+            />
+            <input
+              onChange={handleChange}
+              type="file"
+              id="image_url"
+              label="Image"
+              name="image_url"
             />
           </DialogContent>
           <DialogActions>

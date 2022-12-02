@@ -1,6 +1,5 @@
-import axios from "axios";
 import PostCard from "./PostCard";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 const PublicPosts = ({ updatePublicPosts, publicPostList }) => {
   const postsUrl = "http://localhost:8000/all_posts/";

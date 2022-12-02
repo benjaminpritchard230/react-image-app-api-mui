@@ -1,12 +1,10 @@
 import * as React from "react";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
-import FaceIcon from "@mui/icons-material/Face";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { updateToken } from "../features/user/userSlice";
 import { useSelector, useDispatch } from "react-redux";
-export default function LikeButton({ post, token, username, handleLikeClick }) {
+export default function LikeButton({ post, token, handleLikeClick }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   return (
