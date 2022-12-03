@@ -11,7 +11,7 @@ import { useContext } from "react";
 import { Snackbar } from "@mui/material";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import Dropzone from "react-dropzone";
 export default function NewPostDialog({
   newPostDialog,
   setNewPostDialog,
@@ -62,7 +62,7 @@ export default function NewPostDialog({
     <div>
       <Dialog open={newPostDialog}>
         <form onSubmit={handleSubmit}>
-          <DialogTitle>Enter task name</DialogTitle>
+          <DialogTitle>Create a new post</DialogTitle>
           <DialogContent>
             <DialogContentText></DialogContentText>
             <TextField
@@ -75,9 +75,26 @@ export default function NewPostDialog({
               fullWidth
               variant="standard"
             />
-            <input type="file" id="image_url" label="Image" name="image_url" />
+            {/* <input type="file" id="image_url" label="Image" name="image_url" /> */}
+            <Dropzone onDrop={(acceptedFiles) => console.log(acceptedFiles)}>
+              {({ getRootProps, getInputProps }) => (
+                <section>
+                  <div {...getRootProps()}>
+                    <input
+                      {...getInputProps({
+                        id: "image_url",
+                        label: "image",
+                        name: "image_url",
+                      })}
+                    />
+                    <p>Drop an image here or click to select an image</p>
+                  </div>
+                </section>
+              )}
+            </Dropzone>
           </DialogContent>
           <DialogActions>
+            <Button type="submit">Create post</Button>
             <Button
               onClick={() => {
                 setNewPostDialog(false);
@@ -85,9 +102,9 @@ export default function NewPostDialog({
             >
               Cancel
             </Button>
-            <Button type="submit">Create task</Button>
           </DialogActions>
         </form>
+        ;
       </Dialog>
       <Snackbar
         open={open}
