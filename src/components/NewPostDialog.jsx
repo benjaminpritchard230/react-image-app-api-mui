@@ -28,8 +28,6 @@ export default function NewPostDialog({
   const handleSubmit = (e) => {
     e.preventDefault();
     setNewPostDialog(false);
-    // let caption = e.target[0].value;
-    // let image_url = e.target[1].files[0];
     const data = new FormData(e.target);
     axios
       .post(
@@ -82,7 +80,7 @@ export default function NewPostDialog({
                 "image/png": [".png", ".jpeg", ".jpg", ".webp"],
               }}
             >
-              {({ getRootProps, getInputProps }) => (
+              {({ getRootProps, getInputProps, isDragActive }) => (
                 <section>
                   <div {...getRootProps()}>
                     <input
@@ -92,7 +90,13 @@ export default function NewPostDialog({
                         name: "image_url",
                       })}
                     />
-                    <p>Drop an image here or click to select an image</p>
+                    <DialogContentText>
+                      {isDragActive ? (
+                        <p>Release to upload image</p>
+                      ) : (
+                        <p>Drop an image here or click to select an image</p>
+                      )}
+                    </DialogContentText>
                   </div>
                 </section>
               )}
