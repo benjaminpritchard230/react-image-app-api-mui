@@ -76,7 +76,12 @@ export default function NewPostDialog({
               variant="standard"
             />
             {/* <input type="file" id="image_url" label="Image" name="image_url" /> */}
-            <Dropzone onDrop={(acceptedFiles) => console.log(acceptedFiles)}>
+            <Dropzone
+              onDrop={(acceptedFiles) => console.log(acceptedFiles)}
+              accept={{
+                "image/png": [".png", ".jpeg", ".jpg", ".webp"],
+              }}
+            >
               {({ getRootProps, getInputProps }) => (
                 <section>
                   <div {...getRootProps()}>
