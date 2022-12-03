@@ -1,6 +1,6 @@
 import axios from "axios";
-import PostCard from "./PostCard";
 import { useEffect } from "react";
+import PrivatePostCard from "./PrivatePostCard";
 
 const PrivatePosts = ({ updatePrivatePosts, privatePostList }) => {
   useEffect(() => {
@@ -9,7 +9,7 @@ const PrivatePosts = ({ updatePrivatePosts, privatePostList }) => {
 
   const displayImagePosts = () => {
     return privatePostList.map((post) => (
-      <PostCard
+      <PrivatePostCard
         post={post}
         updatePrivatePosts={updatePrivatePosts}
         key={post.id}
