@@ -11,7 +11,7 @@ import { useContext } from "react";
 import { Snackbar } from "@mui/material";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Dropzone from "react-dropzone";
+import MyDropzone from "./MyDropzone";
 export default function NewPostDialog({
   newPostDialog,
   setNewPostDialog,
@@ -74,33 +74,24 @@ export default function NewPostDialog({
               variant="standard"
             />
             {/* <input type="file" id="image_url" label="Image" name="image_url" /> */}
-            <Dropzone
-              onDrop={(acceptedFiles) => console.log(acceptedFiles)}
+            <MyDropzone
+              inputProps={{
+                id: "image_url",
+                label: "image",
+                name: "image_url",
+              }}
               accept={{
                 "image/png": [".png", ".jpeg", ".jpg", ".webp"],
               }}
             >
-              {({ getRootProps, getInputProps, isDragActive }) => (
+              {({ getRootProps, getInputProps }) => (
                 <section>
                   <div {...getRootProps()}>
-                    <input
-                      {...getInputProps({
-                        id: "image_url",
-                        label: "image",
-                        name: "image_url",
-                      })}
-                    />
-                    <DialogContentText>
-                      {isDragActive ? (
-                        <p>Release to upload image</p>
-                      ) : (
-                        <p>Drop an image here or click to select an image</p>
-                      )}
-                    </DialogContentText>
+                    <input {...getInputProps()} />
                   </div>
                 </section>
               )}
-            </Dropzone>
+            </MyDropzone>
           </DialogContent>
           <DialogActions>
             <Button type="submit">Create post</Button>
