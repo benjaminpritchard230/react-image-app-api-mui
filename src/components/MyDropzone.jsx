@@ -34,20 +34,32 @@ const img = {
 
 export default function MyDropzone({ inputProps }) {
   const [files, setFiles] = useState([]);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: {
-      "image/*": [],
-    },
-    onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
-      );
-    },
-  });
+  const { getRootProps, getInputProps, isDragActive, fileRejections } =
+    useDropzone({
+      accept: {
+        "image/*": [],
+      },
+      onDrop: (acceptedFiles) => {
+        setFiles(
+          acceptedFiles.map((file) =>
+            Object.assign(file, {
+              preview: URL.createObjectURL(file),
+            })
+          )
+        );
+      },
+    });
+
+  const fileRejectionItems = fileRejections.map(({ file, errors }) => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+      <ul>
+        {errors.map((e) => (
+          <li key={e.code}>{e.message}</li>
+        ))}
+      </ul>
+    </li>
+  ));
 
   const thumbs = files.map((file) => (
     <div style={thumb} key={file.name}>
@@ -78,6 +90,8 @@ export default function MyDropzone({ inputProps }) {
         )}
       </div>
       <aside style={thumbsContainer}>{thumbs}</aside>
+      {fileRejectionItems.length > 0 ? <h4>Rejected files</h4> : null}
+      <ul>{fileRejectionItems}</ul>
     </section>
   );
 }
