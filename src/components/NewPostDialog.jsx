@@ -57,8 +57,18 @@ export default function NewPostDialog({
     setOpen(false);
   };
   return (
-    <div>
-      <Dialog open={newPostDialog}>
+    <>
+      <Dialog
+        open={newPostDialog}
+        PaperProps={{
+          sx: {
+            width: {
+              lg: "100vw",
+              xl: "33vw",
+            },
+          },
+        }}
+      >
         <form onSubmit={handleSubmit}>
           <DialogTitle>Create a new post</DialogTitle>
           <DialogContent>
@@ -104,7 +114,6 @@ export default function NewPostDialog({
             </Button>
           </DialogActions>
         </form>
-        ;
       </Dialog>
       <Snackbar
         open={open}
@@ -113,6 +122,6 @@ export default function NewPostDialog({
         message="Task created"
         sx={{ bottom: { xs: 90, sm: 0 } }}
       />
-    </div>
+    </>
   );
 }

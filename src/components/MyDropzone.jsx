@@ -80,7 +80,7 @@ export default function MyDropzone({ inputProps }) {
   }, []);
 
   return (
-    <section className="container">
+    <section className="dropzone-container">
       <div {...getRootProps({ className: "dropzone" })}>
         <input {...getInputProps(inputProps)} />
         {isDragActive ? (
