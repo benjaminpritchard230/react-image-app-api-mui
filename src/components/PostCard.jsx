@@ -13,11 +13,7 @@ import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
 import LikeButton from "./LikeButton";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function PostCard({
-  post,
-  updatePublicPosts,
-  updatePrivatePosts,
-}) {
+export default function PostCard({ post, updatePosts }) {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -52,8 +48,7 @@ export default function PostCard({
         console.log(error);
       })
       .finally(() => {
-        updatePublicPosts();
-        updatePrivatePosts();
+        updatePosts();
       });
   };
 

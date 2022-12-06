@@ -1,20 +1,16 @@
 import PostCard from "./PostCard";
 import { useEffect } from "react";
 
-const PublicPosts = ({ updatePublicPosts, publicPostList }) => {
+const PublicPosts = ({ updatePosts, publicPostList }) => {
   const postsUrl = "http://localhost:8000/all_posts/";
 
   useEffect(() => {
-    updatePublicPosts();
+    updatePosts();
   }, []);
 
   const displayImagePosts = () => {
     return publicPostList.map((post) => (
-      <PostCard
-        post={post}
-        updatePublicPosts={updatePublicPosts}
-        key={post.id}
-      />
+      <PostCard post={post} updatePosts={updatePosts} key={post.id} />
     ));
   };
   return <>{displayImagePosts()}</>;

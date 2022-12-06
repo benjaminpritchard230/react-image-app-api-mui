@@ -15,8 +15,7 @@ import MyDropzone from "./MyDropzone";
 export default function NewPostDialog({
   newPostDialog,
   setNewPostDialog,
-  updatePrivatePosts,
-  updatePublicPosts,
+  updatePosts,
 }) {
   const user = useSelector((state) => state.user);
 
@@ -32,7 +31,11 @@ export default function NewPostDialog({
     axios
       .post(
         `http://localhost:8000/my_posts/`,
-        { caption: data.get("caption"), image_url: data.get("image_url") },
+        {
+          caption: data.get("caption"),
+          image_url: data.get("image_url"),
+          public: true,
+        },
         {
           headers: {
             Authorization: `token ${token}`,
@@ -48,8 +51,7 @@ export default function NewPostDialog({
         console.log(error);
       })
       .finally(() => {
-        updatePrivatePosts();
-        updatePublicPosts();
+        updatePosts();
         setOpen(true);
       });
   };

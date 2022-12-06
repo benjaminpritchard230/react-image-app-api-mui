@@ -11,12 +11,11 @@ import Link from "@mui/material/Link";
 import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import TogglePrivateSwitch from "./TogglePrivateSwitch";
+import Stack from "@mui/material/Stack";
+import DeletePostButton from "./DeletePostButton";
+import axios from "axios";
 
-export default function PrivatePostCard({
-  post,
-  updatePublicPosts,
-  updatePrivatePosts,
-}) {
+export default function PrivatePostCard({ post, updatePosts }) {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -31,6 +30,28 @@ export default function PrivatePostCard({
   const userUrl = `user/${post.user}/`;
   const capitalizeString = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+
+  const handleDeleteClick = () => {
+    axios
+      .delete(
+        `http://localhost:8000/posts/${post.id}/`,
+
+        {
+          headers: {
+            Authorization: `token ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        updatePosts();
+      });
   };
 
   return (
@@ -74,11 +95,19 @@ export default function PrivatePostCard({
             </Typography>
           </CardContent>
           <CardActions>
-            <TogglePrivateSwitch
-              post={post}
-              updatePrivatePosts={updatePrivatePosts}
-              key={post.id}
-            />
+            <Stack
+              direction="row"
+              justifyContent={"flex-end"}
+              alignItems="center"
+              spacing={1}
+            >
+              <DeletePostButton handleDeleteClick={handleDeleteClick} />
+              <TogglePrivateSwitch
+                post={post}
+                updatePosts={updatePosts}
+                key={post.id}
+              />
+            </Stack>
           </CardActions>
         </Card>
       </Item>

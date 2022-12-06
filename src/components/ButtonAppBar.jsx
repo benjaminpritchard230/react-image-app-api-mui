@@ -22,6 +22,11 @@ export default function ButtonAppBar() {
   const token = user.token;
   const navigate = useNavigate();
 
+  const handleLogoutClick = () => {
+    dispatch(clearUser(""));
+    navigate("/");
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -66,7 +71,7 @@ export default function ButtonAppBar() {
               </Button>
               <Button
                 onClick={() => {
-                  dispatch(clearUser(""));
+                  handleLogoutClick();
                 }}
                 color="inherit"
               >

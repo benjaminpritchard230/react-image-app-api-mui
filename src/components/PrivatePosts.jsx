@@ -2,18 +2,14 @@ import axios from "axios";
 import { useEffect } from "react";
 import PrivatePostCard from "./PrivatePostCard";
 
-const PrivatePosts = ({ updatePrivatePosts, privatePostList }) => {
+const PrivatePosts = ({ updatePosts, privatePostList }) => {
   useEffect(() => {
-    updatePrivatePosts();
+    updatePosts();
   }, []);
 
   const displayImagePosts = () => {
     return privatePostList.map((post) => (
-      <PrivatePostCard
-        post={post}
-        updatePrivatePosts={updatePrivatePosts}
-        key={post.id}
-      />
+      <PrivatePostCard post={post} updatePosts={updatePosts} key={post.id} />
     ));
   };
   return <>{displayImagePosts()}</>;

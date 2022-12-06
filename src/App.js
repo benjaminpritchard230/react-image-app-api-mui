@@ -46,18 +46,20 @@ function App() {
   const [newPostDialog, setNewPostDialog] = useState(false);
 
   const updatePrivatePosts = () => {
-    axios
-      .get("http://localhost:8000/my_posts/", {
-        headers: { Authorization: `Token ${token}` },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setPrivatePostList(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {});
+    if (token.length > 0) {
+      axios
+        .get("http://localhost:8000/my_posts/", {
+          headers: { Authorization: `Token ${token}` },
+        })
+        .then((response) => {
+          console.log(response.data);
+          setPrivatePostList(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {});
+    }
   };
 
   const updatePublicPosts = () => {
@@ -75,6 +77,11 @@ function App() {
       .finally(() => {});
   };
 
+  const updatePosts = () => {
+    updatePublicPosts();
+    updatePrivatePosts();
+  };
+
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <CssBaseline />
@@ -89,7 +96,7 @@ function App() {
                 element={
                   <PublicPosts
                     publicPostList={publicPostList}
-                    updatePublicPosts={updatePublicPosts}
+                    updatePosts={updatePosts}
                   />
                 }
               />
@@ -98,7 +105,7 @@ function App() {
                 element={
                   <PrivatePosts
                     privatePostList={privatePostList}
-                    updatePrivatePosts={updatePrivatePosts}
+                    updatePosts={updatePosts}
                   />
                 }
               />
@@ -112,8 +119,7 @@ function App() {
         <NewPostDialog
           newPostDialog={newPostDialog}
           setNewPostDialog={setNewPostDialog}
-          updatePrivatePosts={updatePrivatePosts}
-          updatePublicPosts={updatePublicPosts}
+          updatePosts={updatePosts}
         />
       </Router>
     </ThemeProvider>

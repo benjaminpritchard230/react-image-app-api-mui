@@ -24,6 +24,7 @@ export const userSlice = createSlice({
       const { payload } = param;
       state.username = payload;
       state.token = payload;
+      state.id = payload;
     },
   },
 });
