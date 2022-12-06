@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useSelector, useDispatch } from "react-redux";
 import Avatar from "@mui/material/Avatar";
+import { useLocation } from "react-router-dom";
 
 import {
   updateUsername,
@@ -15,12 +16,15 @@ import {
   clearUser,
 } from "../features/user/userSlice";
 import { useNavigate, Link } from "react-router-dom";
+import PrivatePostsButton from "./PrivatePostsButton";
 
 export default function ButtonAppBar() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const token = user.token;
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
 
   const handleLogoutClick = () => {
     dispatch(clearUser(""));
@@ -59,16 +63,10 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {user.token}
           </Typography>
+
           {token.length > 0 ? (
             <>
-              <Button
-                onClick={() => {
-                  navigate("/private");
-                }}
-                color="inherit"
-              >
-                Private
-              </Button>
+              <PrivatePostsButton />
               <Button
                 onClick={() => {
                   handleLogoutClick();
