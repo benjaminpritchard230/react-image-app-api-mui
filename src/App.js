@@ -18,6 +18,7 @@ import PrivatePosts from "./components/PrivatePosts";
 import UserCard from "./components/UserCard";
 import FloatingActionButtons from "./components/FloatingActionButtons";
 import NewPostDialog from "./components/NewPostDialog";
+import PaginationButtons from "./components/PaginationButtons";
 
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
@@ -44,6 +45,7 @@ function App() {
 
   const theme = "light";
   const [newPostDialog, setNewPostDialog] = useState(false);
+  const [page, setPage] = useState(2);
 
   const updatePrivatePosts = () => {
     if (token.length > 0) {
@@ -64,12 +66,12 @@ function App() {
 
   const updatePublicPosts = () => {
     axios
-      .get("http://localhost:8000/all_posts/", {
+      .get(`http://localhost:8000/all_posts?page=${page}`, {
         headers: {},
       })
       .then((response) => {
         console.log(response.data);
-        setPublicPostList(response.data);
+        setPublicPostList(response.data.results);
       })
       .catch((error) => {
         console.log(error);
@@ -120,6 +122,11 @@ function App() {
           newPostDialog={newPostDialog}
           setNewPostDialog={setNewPostDialog}
           updatePosts={updatePosts}
+        />
+        <PaginationButtons
+          page={page}
+          setPage={setPage}
+          updatePublicPosts={updatePublicPosts}
         />
       </Router>
     </ThemeProvider>
