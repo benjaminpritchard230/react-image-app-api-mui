@@ -125,18 +125,18 @@ function App() {
               <Route path={"/user/:id"} element={<UserCard />} />
             </Routes>
           </Grid>
+          <PaginationButtons
+            publicPostCount={publicPostCount}
+            page={page}
+            setPage={setPage}
+            updatePublicPosts={updatePublicPosts}
+          />
         </Box>
         <FloatingActionButtons setNewPostDialog={setNewPostDialog} />
         <NewPostDialog
           newPostDialog={newPostDialog}
           setNewPostDialog={setNewPostDialog}
           updatePosts={updatePosts}
-        />
-        <PaginationButtons
-          publicPostCount={publicPostCount}
-          page={page}
-          setPage={setPage}
-          updatePublicPosts={updatePublicPosts}
         />
       </Router>
     </ThemeProvider>
