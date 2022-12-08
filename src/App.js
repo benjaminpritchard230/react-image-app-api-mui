@@ -43,9 +43,11 @@ function App() {
   const [publicPostList, setPublicPostList] = useState([]);
   const [privatePostList, setPrivatePostList] = useState([]);
 
+  const [publicPostCount, setPublicPostCount] = useState(0);
+
   const theme = "light";
   const [newPostDialog, setNewPostDialog] = useState(false);
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
 
   const updatePrivatePosts = () => {
     if (token.length > 0) {
@@ -70,8 +72,11 @@ function App() {
         headers: {},
       })
       .then((response) => {
+        console.log(page);
+
         console.log(response.data);
         setPublicPostList(response.data.results);
+        setPublicPostCount(response.data.count);
       })
       .catch((error) => {
         console.log(error);
@@ -83,6 +88,10 @@ function App() {
     updatePublicPosts();
     updatePrivatePosts();
   };
+
+  useEffect(() => {
+    updatePublicPosts();
+  }, [page]);
 
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
@@ -124,6 +133,7 @@ function App() {
           updatePosts={updatePosts}
         />
         <PaginationButtons
+          publicPostCount={publicPostCount}
           page={page}
           setPage={setPage}
           updatePublicPosts={updatePublicPosts}
