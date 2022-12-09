@@ -19,6 +19,7 @@ import UserCard from "./components/UserCard";
 import FloatingActionButtons from "./components/FloatingActionButtons";
 import NewPostDialog from "./components/NewPostDialog";
 import PaginationButtons from "./components/PaginationButtons";
+import { useLocation } from "react-router-dom";
 
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
@@ -105,10 +106,18 @@ function App() {
               <Route
                 path={"/"}
                 element={
-                  <PublicPosts
-                    publicPostList={publicPostList}
-                    updatePosts={updatePosts}
-                  />
+                  <>
+                    <PublicPosts
+                      publicPostList={publicPostList}
+                      updatePosts={updatePosts}
+                    />
+                    <PaginationButtons
+                      publicPostCount={publicPostCount}
+                      page={page}
+                      setPage={setPage}
+                      updatePublicPosts={updatePublicPosts}
+                    />
+                  </>
                 }
               />
               <Route
@@ -125,12 +134,6 @@ function App() {
               <Route path={"/user/:id"} element={<UserCard />} />
             </Routes>
           </Grid>
-          <PaginationButtons
-            publicPostCount={publicPostCount}
-            page={page}
-            setPage={setPage}
-            updatePublicPosts={updatePublicPosts}
-          />
         </Box>
         <FloatingActionButtons setNewPostDialog={setNewPostDialog} />
         <NewPostDialog
