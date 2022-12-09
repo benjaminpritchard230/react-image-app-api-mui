@@ -20,6 +20,7 @@ import FloatingActionButtons from "./components/FloatingActionButtons";
 import NewPostDialog from "./components/NewPostDialog";
 import PaginationButtons from "./components/PaginationButtons";
 import { useLocation } from "react-router-dom";
+import UserPosts from "./components/UserPosts";
 
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
@@ -49,6 +50,7 @@ function App() {
   const theme = "light";
   const [newPostDialog, setNewPostDialog] = useState(false);
   const [page, setPage] = useState(1);
+  const [userId, setUserId] = useState(1);
 
   const updatePrivatePosts = () => {
     if (token.length > 0) {
@@ -131,7 +133,15 @@ function App() {
               />
               <Route path={"/login"} element={<Login />} />
               <Route path={"/register"} element={<Register />} />
-              <Route path={"/user/:id"} element={<UserCard />} />
+              <Route
+                path={"/user/:id"}
+                element={
+                  <>
+                    <UserCard setUserId={setUserId} />
+                    <UserPosts />
+                  </>
+                }
+              />
             </Routes>
           </Grid>
         </Box>

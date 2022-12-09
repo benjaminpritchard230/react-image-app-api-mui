@@ -18,7 +18,7 @@ const bull = (
   </Box>
 );
 
-export default function UserCard() {
+export default function UserCard({ setUserId }) {
   const { id } = useParams();
   const [user, setUser] = useState({});
   const userUrl = `http://localhost:8000/user/${id}/`;
@@ -40,6 +40,10 @@ export default function UserCard() {
   useEffect(() => {
     updateUser();
   }, []);
+
+  useEffect(() => {
+    setUserId(id);
+  }, [id]);
 
   return (
     <Card sx={{ minWidth: 275 }}>
