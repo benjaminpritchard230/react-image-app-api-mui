@@ -8,23 +8,19 @@ export const userSlice = createSlice({
     id: null,
   },
   reducers: {
-    updateUsername: (state, param) => {
-      const { payload } = param;
-      state.username = payload;
+    updateUsername: (state, action) => {
+      state.username = action.payload;
     },
-    updateToken: (state, param) => {
-      const { payload } = param;
-      state.token = payload;
+    updateToken: (state, action) => {
+      state.token = action.payload;
     },
-    updateId: (state, param) => {
-      const { payload } = param;
-      state.id = payload;
+    updateId: (state, action) => {
+      state.id = action.payload;
     },
-    clearUser: (state, param) => {
-      const { payload } = param;
-      state.username = payload;
-      state.token = payload;
-      state.id = payload;
+    clearUser: (state, action) => {
+      state.username = action.payload;
+      state.token = action.payload;
+      state.id = action.payload;
     },
   },
 });
