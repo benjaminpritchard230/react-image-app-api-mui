@@ -21,6 +21,7 @@ import NewPostDialog from "./components/NewPostDialog";
 import PaginationButtons from "./components/PaginationButtons";
 import { useLocation } from "react-router-dom";
 import UserPosts from "./components/UserPosts";
+import { refreshPublicPosts } from "./features/publicPosts/publicPostsSlice";
 
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
@@ -41,11 +42,13 @@ function App() {
   });
 
   const user = useSelector((state) => state.user);
+  const publicPosts = useSelector((state) => state.publicPosts);
+  console.log(publicPosts.posts);
   const token = user.token;
   const [publicPostList, setPublicPostList] = useState([]);
   const [privatePostList, setPrivatePostList] = useState([]);
 
-  const [publicPostCount, setPublicPostCount] = useState(0);
+  const [publicPostCount, setPublicPostCount] = useState(10);
 
   const theme = "light";
   const [newPostDialog, setNewPostDialog] = useState(false);
@@ -78,13 +81,15 @@ function App() {
         console.log(page);
 
         console.log(response.data);
-        setPublicPostList(response.data.results);
-        setPublicPostCount(response.data.count);
+        refreshPublicPosts(response.data.results);
+        // setPublicPostCount(response.data.count);
       })
       .catch((error) => {
         console.log(error);
       })
-      .finally(() => {});
+      .finally(() => {
+        console.log(publicPosts);
+      });
   };
 
   const updatePosts = () => {
@@ -109,10 +114,7 @@ function App() {
                 path={"/"}
                 element={
                   <>
-                    <PublicPosts
-                      publicPostList={publicPostList}
-                      updatePosts={updatePosts}
-                    />
+                    <PublicPosts updatePosts={updatePosts} />
                     <PaginationButtons
                       publicPostCount={publicPostCount}
                       page={page}
