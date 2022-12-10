@@ -21,6 +21,7 @@ import NewPostDialog from "./components/NewPostDialog";
 import PaginationButtons from "./components/PaginationButtons";
 import { useLocation } from "react-router-dom";
 import UserPosts from "./components/UserPosts";
+import { useGetPublicPostsQuery } from "./features/api/apiSlice";
 
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
@@ -51,6 +52,16 @@ function App() {
   const [newPostDialog, setNewPostDialog] = useState(false);
   const [page, setPage] = useState(1);
   const [userId, setUserId] = useState(1);
+  const {
+    data: publicPostsData,
+    error,
+    isError,
+    isLoading,
+  } = useGetPublicPostsQuery();
+  console.log(publicPostsData, "rtk");
+  console.log(error, "rtk");
+  console.log(isError, "rtk");
+  console.log(isLoading, "rtk");
 
   const updatePrivatePosts = () => {
     if (token.length > 0) {
