@@ -21,7 +21,11 @@ import NewPostDialog from "./components/NewPostDialog";
 import PaginationButtons from "./components/PaginationButtons";
 import { useLocation } from "react-router-dom";
 import UserPosts from "./components/UserPosts";
-import { refreshPublicPosts } from "./features/publicPosts/publicPostsSlice";
+// import { refreshPublicPosts } from "./features/publicPosts/publicPostsSlice";
+import {
+  selectAllPosts,
+  fetchPosts,
+} from "./features/publicPosts/publicPostsSlice";
 
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
@@ -42,14 +46,14 @@ function App() {
   });
 
   const user = useSelector((state) => state.user);
-  const publicPosts = useSelector((state) => state.publicPosts);
-  console.log(publicPosts.posts);
+  const publicPosts = useSelector(selectAllPosts);
+  console.log(publicPosts, "pubes");
   const token = user.token;
   const [publicPostList, setPublicPostList] = useState([]);
   const [privatePostList, setPrivatePostList] = useState([]);
-
+  const postStatus = useSelector((state) => state.posts.status);
   const [publicPostCount, setPublicPostCount] = useState(10);
-
+  const dispatch = useDispatch();
   const theme = "light";
   const [newPostDialog, setNewPostDialog] = useState(false);
   const [page, setPage] = useState(1);
@@ -81,7 +85,7 @@ function App() {
         console.log(page);
 
         console.log(response.data);
-        refreshPublicPosts(response.data.results);
+        // refreshPublicPosts(response.data.results);
         // setPublicPostCount(response.data.count);
       })
       .catch((error) => {
@@ -100,6 +104,12 @@ function App() {
   useEffect(() => {
     updatePublicPosts();
   }, [page]);
+
+  useEffect(() => {
+    if (postStatus === "idle") {
+      dispatch(fetchPosts());
+    }
+  }, [postStatus, dispatch]);
 
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
