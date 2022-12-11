@@ -63,6 +63,7 @@ export default function Login() {
       const user = await login(formState).unwrap();
       dispatch(setCredentials(user));
       navigate("/");
+      console.log(user, "user");
     } catch (err) {
       console.log(err);
     }
