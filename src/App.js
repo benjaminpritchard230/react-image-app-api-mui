@@ -22,6 +22,8 @@ import PaginationButtons from "./components/PaginationButtons";
 import { useLocation } from "react-router-dom";
 import UserPosts from "./components/UserPosts";
 import { useGetPublicPostsQuery } from "./features/api/apiSlice";
+import { useLoginMutation } from "./features/api/apiSlice";
+import { setCredentials } from "./features/auth/authSlice";
 
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
@@ -40,8 +42,12 @@ function App() {
       },
     },
   });
-
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const currentUser = useSelector((state) => state.auth);
+
+  const [login, { data, isLoading }] = useLoginMutation();
+
   const token = user.token;
   const [publicPostList, setPublicPostList] = useState([]);
   const [privatePostList, setPrivatePostList] = useState([]);
@@ -77,6 +83,24 @@ function App() {
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <CssBaseline />
+
+      <button
+        onClick={() => {
+          login({ username: "bprit", password: "benben11" });
+          if (!isLoading) {
+            dispatch(setCredentials(data));
+          }
+        }}
+      >
+        login
+      </button>
+      <button
+        onClick={() => {
+          console.log(currentUser, "currentuser");
+        }}
+      >
+        print user
+      </button>
       <Router>
         <ButtonAppBar />
         <Box sx={{ flexGrow: 1, minWidth: 1 }} key="1">
