@@ -69,29 +69,6 @@ export default function Login() {
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    axios
-      .post("http://localhost:8000/login/", {
-        username: data.get("username"),
-        password: data.get("password"),
-      })
-      .then((response) => {
-        console.log(response.data);
-        dispatch(updateUsername(data.get("username")));
-        dispatch(updateToken(response.data.token));
-        dispatch(updateId(response.data.id));
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        navigate("/");
-      });
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -110,12 +87,7 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required

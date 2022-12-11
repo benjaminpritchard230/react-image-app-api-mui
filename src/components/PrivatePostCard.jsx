@@ -9,12 +9,9 @@ import Paper from "@mui/material/Paper";
 import { motion } from "framer-motion";
 import Link from "@mui/material/Link";
 import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import TogglePrivateSwitch from "./TogglePrivateSwitch";
 import Stack from "@mui/material/Stack";
 import DeletePostButton from "./DeletePostButton";
-import axios from "axios";
-import { useDeleteMutation } from "../features/api/apiSlice";
 
 export default function PrivatePostCard({ post, updatePosts }) {
   const Item = styled(Paper)(({ theme }) => ({

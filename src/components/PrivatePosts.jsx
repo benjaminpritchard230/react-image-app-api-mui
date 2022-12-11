@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect } from "react";
 import PrivatePostCard from "./PrivatePostCard";
 import { useGetPrivatePostsQuery } from "../features/api/apiSlice";
