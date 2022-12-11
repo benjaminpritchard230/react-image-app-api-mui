@@ -21,6 +21,9 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import { useLoginMutation } from "../features/api/apiSlice";
+import { setCredentials } from "../features/auth/authSlice";
+import { useState } from "react";
 
 function Copyright(props) {
   return (
@@ -46,6 +49,24 @@ export default function Login() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const [login, { isLoading }] = useLoginMutation();
+  const [formState, setFormState] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleChange = ({ target: { name, value } }) =>
+    setFormState((prev) => ({ ...prev, [name]: value }));
+
+  const handleLoginClick = async () => {
+    try {
+      const user = await login(formState).unwrap();
+      dispatch(setCredentials(user));
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -103,6 +124,7 @@ export default function Login() {
               name="username"
               autoComplete="username"
               autoFocus
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -113,18 +135,31 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={() => {
+                handleLoginClick();
+              }}
             >
               Sign In
+            </Button>
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={() => {
+                console.log(formState);
+              }}
+            >
+              details
             </Button>
             <Grid container>
               <Grid item xs>
