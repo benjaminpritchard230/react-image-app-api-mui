@@ -15,6 +15,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useRegisterMutation } from "../features/api/apiSlice";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 function Copyright(props) {
   return (
@@ -38,28 +41,23 @@ const theme = createTheme();
 
 export default function Register() {
   const navigate = useNavigate();
+  const [register, { isLoading }] = useRegisterMutation();
+  const [formState, setFormState] = useState({
+    username: "",
+    password: "",
+  });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get("username"),
-      password: data.get("password"),
-    });
-    axios
-      .post("http://localhost:8000/register/", {
-        username: data.get("username"),
-        password: data.get("password"),
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        navigate("/login");
-      });
+  const handleChange = ({ target: { name, value } }) =>
+    setFormState((prev) => ({ ...prev, [name]: value }));
+
+  const handleRegisterClick = async () => {
+    try {
+      const user = await register(formState).unwrap();
+      navigate("/login");
+      console.log(user, "user");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -80,12 +78,7 @@ export default function Register() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -95,6 +88,7 @@ export default function Register() {
                   label="Username"
                   name="username"
                   autoComplete="username"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -106,11 +100,14 @@ export default function Register() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={handleChange}
                 />
               </Grid>
             </Grid>
             <Button
-              type="submit"
+              onClick={() => {
+                handleRegisterClick();
+              }}
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
