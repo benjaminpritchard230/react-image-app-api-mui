@@ -52,16 +52,6 @@ function App() {
   const [newPostDialog, setNewPostDialog] = useState(false);
   const [page, setPage] = useState(1);
   const [userId, setUserId] = useState(1);
-  const {
-    data: publicPostsData,
-    error,
-    isError,
-    isLoading,
-  } = useGetPublicPostsQuery();
-  console.log(publicPostsData, "rtk");
-  console.log(error, "rtk");
-  console.log(isError, "rtk");
-  console.log(isLoading, "rtk");
 
   const updatePrivatePosts = () => {
     if (token.length > 0) {
@@ -80,32 +70,9 @@ function App() {
     }
   };
 
-  const updatePublicPosts = () => {
-    axios
-      .get(`http://localhost:8000/all_posts?page=${page}`, {
-        headers: {},
-      })
-      .then((response) => {
-        console.log(page);
-
-        console.log(response.data);
-        setPublicPostList(response.data.results);
-        setPublicPostCount(response.data.count);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {});
-  };
-
   const updatePosts = () => {
-    updatePublicPosts();
     updatePrivatePosts();
   };
-
-  useEffect(() => {
-    updatePublicPosts();
-  }, [page]);
 
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
@@ -123,13 +90,9 @@ function App() {
                     <PublicPosts
                       publicPostList={publicPostList}
                       updatePosts={updatePosts}
-                    />
-                    <PaginationButtons
-                      publicPostCount={publicPostCount}
                       page={page}
-                      setPage={setPage}
-                      updatePublicPosts={updatePublicPosts}
                     />
+                    <PaginationButtons page={page} setPage={setPage} />
                   </>
                 }
               />

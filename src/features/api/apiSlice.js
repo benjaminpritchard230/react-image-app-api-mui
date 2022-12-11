@@ -5,9 +5,19 @@ export const postsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/" }),
   endpoints: (builder) => ({
     getPublicPosts: builder.query({
-      query: () => "all_posts/",
+      query: (page) => `all_posts?page=${page}`,
+    }),
+    getUserPosts: builder.query({
+      query: (id) => `user/${id}/posts/`,
+    }),
+    getUserInfo: builder.query({
+      query: (id) => `user/${id}/`,
     }),
   }),
 });
 
-export const { useGetPublicPostsQuery } = postsApi;
+export const {
+  useGetPublicPostsQuery,
+  useGetUserPostsQuery,
+  useGetUserInfoQuery,
+} = postsApi;

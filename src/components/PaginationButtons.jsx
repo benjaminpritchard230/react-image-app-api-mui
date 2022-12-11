@@ -1,10 +1,8 @@
 import * as React from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { Typography } from "@mui/material";
-import { useEffect } from "react";
-import { useCallback } from "react";
-export default function PaginationButtons({ page, setPage, publicPostCount }) {
+import { useGetPublicPostsQuery } from "../features/api/apiSlice";
+export default function PaginationButtons({ page, setPage }) {
   const style = {
     margin: 0,
     top: "auto",
@@ -12,13 +10,18 @@ export default function PaginationButtons({ page, setPage, publicPostCount }) {
     bottom: 35,
     position: "fixed",
   };
-
+  const {
+    data: publicPostsData,
+    error,
+    isError,
+    isLoading,
+  } = useGetPublicPostsQuery(page);
   const handlePageChange = (event, value) => {
     setPage(value);
     console.log(value);
   };
 
-  const count = Math.ceil(publicPostCount / 12);
+  const count = !isLoading ? Math.ceil(publicPostsData.count / 12) : 0;
 
   return (
     <Stack spacing={2} style={style}>

@@ -1,17 +1,21 @@
 import PostCard from "./PostCard";
-import { useEffect } from "react";
+import { useGetPublicPostsQuery } from "../features/api/apiSlice";
 
-const PublicPosts = ({ updatePosts, publicPostList }) => {
-  const postsUrl = "http://localhost:8000/all_posts/";
-
-  useEffect(() => {
-    updatePosts();
-  }, []);
+const PublicPosts = ({ updatePosts, page }) => {
+  const {
+    data: publicPostsData,
+    error,
+    isError,
+    isLoading,
+  } = useGetPublicPostsQuery(page);
+  console.log(publicPostsData, "publicposts");
 
   const displayImagePosts = () => {
-    return publicPostList.map((post) => (
-      <PostCard post={post} updatePosts={updatePosts} key={post.id} />
-    ));
+    if (!isLoading) {
+      return publicPostsData.results.map((post) => (
+        <PostCard post={post} updatePosts={updatePosts} key={post.id} />
+      ));
+    }
   };
   return <>{displayImagePosts()}</>;
 };
