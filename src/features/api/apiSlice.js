@@ -12,15 +12,19 @@ export const postsApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["Posts", "Auth"],
   endpoints: (builder) => ({
     getPublicPosts: builder.query({
       query: (page) => `all_posts?page=${page}`,
+      providesTags: ["Posts"],
     }),
     getPrivatePosts: builder.query({
       query: () => `my_posts/`,
+      providesTags: ["Posts"],
     }),
     getUserPosts: builder.query({
       query: (id) => `user/${id}/posts/`,
+      providesTags: ["Posts"],
     }),
     getUserInfo: builder.query({
       query: (id) => `user/${id}/`,
@@ -30,6 +34,7 @@ export const postsApi = createApi({
         url: `posts/${id}/like/`,
         method: "PUT",
       }),
+      invalidatesTags: ["Posts"],
     }),
     login: builder.mutation({
       query: (credentials) => ({
