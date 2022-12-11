@@ -47,7 +47,6 @@ const theme = createTheme();
 
 export default function Login() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [login, { isLoading }] = useLoginMutation();
   const [formState, setFormState] = useState({
