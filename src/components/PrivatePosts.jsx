@@ -16,9 +16,11 @@ const PrivatePosts = ({ updatePosts, privatePostList }) => {
   }, []);
 
   const displayImagePosts = () => {
-    return privatePostList.map((post) => (
-      <PrivatePostCard post={post} updatePosts={updatePosts} key={post.id} />
-    ));
+    if (!isLoading) {
+      return privatePostsData.map((post) => (
+        <PrivatePostCard post={post} updatePosts={updatePosts} key={post.id} />
+      ));
+    }
   };
   return <>{displayImagePosts()}</>;
 };
