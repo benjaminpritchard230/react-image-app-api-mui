@@ -12,6 +12,7 @@ import Link from "@mui/material/Link";
 import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
 import LikeButton from "./LikeButton";
 import { useSelector, useDispatch } from "react-redux";
+import { useLikeMutation, useLoginMutation } from "../features/api/apiSlice";
 
 export default function PostCard({ post, updatePosts }) {
   const Item = styled(Paper)(({ theme }) => ({
@@ -28,28 +29,6 @@ export default function PostCard({ post, updatePosts }) {
   const userUrl = `user/${post.user}/`;
   const capitalizeString = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-  };
-
-  const handleLikeClick = () => {
-    axios
-      .put(
-        `http://localhost:8000/posts/${post.id}/like/`,
-        {},
-        {
-          headers: {
-            Authorization: `token ${token}`,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        updatePosts();
-      });
   };
 
   // console.log(post.likes);

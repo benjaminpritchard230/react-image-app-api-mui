@@ -2,8 +2,10 @@ import axios from "axios";
 import { useEffect } from "react";
 import PrivatePostCard from "./PrivatePostCard";
 import { useGetPrivatePostsQuery } from "../features/api/apiSlice";
-
+import { useSelector } from "react-redux";
 const PrivatePosts = ({ updatePosts, privatePostList }) => {
+  const auth = useSelector((state) => state.auth);
+  const token = auth.token;
   const {
     data: privatePostsData,
     error,
@@ -22,7 +24,9 @@ const PrivatePosts = ({ updatePosts, privatePostList }) => {
       ));
     }
   };
-  return <>{displayImagePosts()}</>;
+  return (
+    <>{token.length > 0 ? displayImagePosts() : "Login to see private posts"}</>
+  );
 };
 
 export default PrivatePosts;

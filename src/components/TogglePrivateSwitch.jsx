@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 export default function TogglePrivateSwitch({ post }) {
-  const user = useSelector((state) => state.user);
-  const token = user.token;
+  const auth = useSelector((state) => state.auth);
+  const token = auth.token;
   const [checked, setChecked] = useState(post.public === true ? false : true);
 
   const editPostUrl = `http://localhost:8000/posts/${post.id}/`;

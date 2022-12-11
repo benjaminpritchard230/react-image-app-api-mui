@@ -4,9 +4,15 @@ import Stack from "@mui/material/Stack";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector, useDispatch } from "react-redux";
-export default function LikeButton({ post, token, handleLikeClick }) {
-  const dispatch = useDispatch();
+import { useLikeMutation } from "../features/api/apiSlice";
+export default function LikeButton({ post, token }) {
   const auth = useSelector((state) => state.auth);
+
+  const [like, { isLoading }] = useLikeMutation();
+
+  const handleLikeClick = () => {
+    like(post.id);
+  };
   return (
     <Stack direction="row" spacing={1}>
       {token.length > 0 ? (
