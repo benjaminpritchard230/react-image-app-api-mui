@@ -3,7 +3,6 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import axios from "axios";
 import { Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -12,7 +11,6 @@ import Link from "@mui/material/Link";
 import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
 import LikeButton from "./LikeButton";
 import { useSelector, useDispatch } from "react-redux";
-import { useLikeMutation, useLoginMutation } from "../features/api/apiSlice";
 
 export default function PostCard({ post, updatePosts }) {
   const Item = styled(Paper)(({ theme }) => ({
@@ -71,12 +69,7 @@ export default function PostCard({ post, updatePosts }) {
           </CardContent>
           <CardActions>
             {/* <PostCardButtons post={post} handleLikeClick={handleLikeClick} /> */}
-            <LikeButton
-              post={post}
-              handleLikeClick={handleLikeClick}
-              token={token}
-              username={auth.username}
-            />
+            <LikeButton post={post} token={token} username={auth.username} />
           </CardActions>
         </Card>
       </Item>
