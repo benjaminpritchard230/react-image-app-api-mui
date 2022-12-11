@@ -14,6 +14,7 @@ import TogglePrivateSwitch from "./TogglePrivateSwitch";
 import Stack from "@mui/material/Stack";
 import DeletePostButton from "./DeletePostButton";
 import axios from "axios";
+import { useDeleteMutation } from "../features/api/apiSlice";
 
 export default function PrivatePostCard({ post, updatePosts }) {
   const Item = styled(Paper)(({ theme }) => ({
@@ -24,34 +25,9 @@ export default function PrivatePostCard({ post, updatePosts }) {
     color: theme.palette.text.secondary,
   }));
 
-  const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
-  const token = auth.token;
   const userUrl = `user/${post.user}/`;
   const capitalizeString = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-  };
-
-  const handleDeleteClick = () => {
-    axios
-      .delete(
-        `http://localhost:8000/posts/${post.id}/`,
-
-        {
-          headers: {
-            Authorization: `token ${token}`,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        updatePosts();
-      });
   };
 
   return (
@@ -101,7 +77,7 @@ export default function PrivatePostCard({ post, updatePosts }) {
               alignItems="center"
               spacing={1}
             >
-              <DeletePostButton handleDeleteClick={handleDeleteClick} />
+              <DeletePostButton post={post} />
               <TogglePrivateSwitch
                 post={post}
                 updatePosts={updatePosts}

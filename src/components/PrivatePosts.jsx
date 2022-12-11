@@ -18,15 +18,13 @@ const PrivatePosts = ({ updatePosts, privatePostList }) => {
   }, []);
 
   const displayImagePosts = () => {
-    if (!isLoading) {
+    if (!isLoading && privatePostsData) {
       return privatePostsData.map((post) => (
         <PrivatePostCard post={post} updatePosts={updatePosts} key={post.id} />
       ));
     }
   };
-  return (
-    <>{token.length > 0 ? displayImagePosts() : "Login to see private posts"}</>
-  );
+  return <>{displayImagePosts()}</>;
 };
 
 export default PrivatePosts;
