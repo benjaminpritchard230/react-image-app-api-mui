@@ -36,6 +36,14 @@ export const postsApi = createApi({
       }),
       invalidatesTags: ["Posts"],
     }),
+    makePrivate: builder.mutation({
+      query: (post) => ({
+        url: `posts/${post.id}/`,
+        method: "PUT",
+        body: { caption: post.caption, public: !post.public },
+      }),
+      // invalidatesTags: ["Posts"],
+    }),
     delete: builder.mutation({
       query: (id) => ({
         url: `posts/${id}/`,
@@ -50,6 +58,13 @@ export const postsApi = createApi({
         body: credentials,
       }),
     }),
+    register: builder.mutation({
+      query: (credentials) => ({
+        url: "register/",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
   }),
 });
 
@@ -59,6 +74,8 @@ export const {
   useGetUserPostsQuery,
   useGetUserInfoQuery,
   useLikeMutation,
+  useMakePrivateMutation,
   useDeleteMutation,
   useLoginMutation,
+  useRegisterMutation,
 } = postsApi;
