@@ -7,7 +7,7 @@ export const postsApi = createApi({
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
       if (token) {
-        headers.set("authorization", `Bearer ${token}`);
+        headers.set("authorization", `Token ${token}`);
       }
       return headers;
     },
@@ -15,6 +15,9 @@ export const postsApi = createApi({
   endpoints: (builder) => ({
     getPublicPosts: builder.query({
       query: (page) => `all_posts?page=${page}`,
+    }),
+    getPrivatePosts: builder.query({
+      query: () => `my_posts/`,
     }),
     getUserPosts: builder.query({
       query: (id) => `user/${id}/posts/`,
@@ -34,6 +37,7 @@ export const postsApi = createApi({
 
 export const {
   useGetPublicPostsQuery,
+  useGetPrivatePostsQuery,
   useGetUserPostsQuery,
   useGetUserInfoQuery,
   useLoginMutation,

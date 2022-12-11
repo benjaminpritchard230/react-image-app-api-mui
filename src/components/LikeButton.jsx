@@ -6,13 +6,13 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector, useDispatch } from "react-redux";
 export default function LikeButton({ post, token, handleLikeClick }) {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const auth = useSelector((state) => state.auth);
   return (
     <Stack direction="row" spacing={1}>
       {token.length > 0 ? (
         <Chip
           icon={
-            post.likes.includes(user.id) ? (
+            post.likes.includes(auth.id) ? (
               <FavoriteIcon color="error" />
             ) : (
               <FavoriteBorderIcon />

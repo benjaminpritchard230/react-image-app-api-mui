@@ -152,16 +152,7 @@ export default function Login() {
             >
               Sign In
             </Button>
-            <Button
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={() => {
-                console.log(formState);
-              }}
-            >
-              details
-            </Button>
+
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

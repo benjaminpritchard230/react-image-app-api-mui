@@ -23,8 +23,8 @@ export default function PostCard({ post, updatePosts }) {
   }));
 
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const token = user.token;
+  const auth = useSelector((state) => state.auth);
+  const token = auth.token;
   const userUrl = `user/${post.user}/`;
   const capitalizeString = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -96,7 +96,7 @@ export default function PostCard({ post, updatePosts }) {
               post={post}
               handleLikeClick={handleLikeClick}
               token={token}
-              username={user.username}
+              username={auth.username}
             />
           </CardActions>
         </Card>

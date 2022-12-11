@@ -17,9 +17,9 @@ export default function NewPostDialog({
   setNewPostDialog,
   updatePosts,
 }) {
-  const user = useSelector((state) => state.user);
+  const auth = useSelector((state) => state.auth);
 
-  const token = user.token;
+  const token = auth.token;
 
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState();

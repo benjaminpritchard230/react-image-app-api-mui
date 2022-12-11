@@ -9,6 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useSelector, useDispatch } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import { useLocation } from "react-router-dom";
+import { setCredentials } from "../features/auth/authSlice";
 
 import {
   updateUsername,
@@ -20,14 +21,14 @@ import PrivatePostsButton from "./PrivatePostsButton";
 
 export default function ButtonAppBar() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const token = user.token;
+  const auth = useSelector((state) => state.auth);
+  const token = auth.token;
   const navigate = useNavigate();
   const location = useLocation();
   console.log(location);
 
   const handleLogoutClick = () => {
-    dispatch(clearUser(""));
+    dispatch(setCredentials({ id: "", token: "" }));
     navigate("/");
   };
 
@@ -55,13 +56,13 @@ export default function ButtonAppBar() {
             Image App
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {user.username}
+            {auth.username}
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {user.id}
+            {auth.id}
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {user.token}
+            {auth.token}
           </Typography>
 
           {token.length > 0 ? (
@@ -96,7 +97,7 @@ export default function ButtonAppBar() {
               </Button>
             </>
           )}
-          <Avatar alt={user.username} src="/static/images/avatar/2.jpg" />
+          <Avatar alt={auth.username} src="/static/images/avatar/2.jpg" />
         </Toolbar>
       </AppBar>
     </Box>

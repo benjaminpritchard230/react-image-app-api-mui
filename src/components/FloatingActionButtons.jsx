@@ -19,8 +19,8 @@ export default function FloatingActionButtons({ setNewPostDialog }) {
     left: "auto",
     position: "fixed",
   };
-  const user = useSelector((state) => state.user);
-  const token = user.token;
+  const auth = useSelector((state) => state.auth);
+  const token = auth.token;
   const handleNewPostClick = () => {
     if (token.length > 0) {
       setNewPostDialog(true);
