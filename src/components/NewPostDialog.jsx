@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { Snackbar } from "@mui/material";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNewPostMutation } from "../features/api/apiSlice";
 import MyDropzone from "./MyDropzone";
 export default function NewPostDialog({
   newPostDialog,
@@ -23,37 +24,15 @@ export default function NewPostDialog({
 
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState();
+  const [newPost, { isLoading }] = useNewPostMutation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setNewPostDialog(false);
     const data = new FormData(e.target);
-    axios
-      .post(
-        `http://localhost:8000/my_posts/`,
-        {
-          caption: data.get("caption"),
-          image_url: data.get("image_url"),
-          public: true,
-        },
-        {
-          headers: {
-            Authorization: `token ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response.data);
-        console.log(data.get("image_url"));
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        updatePosts();
-        setOpen(true);
-      });
+    data.append("public", true);
+    console.log(data, "data");
+    newPost(data);
   };
   const handleClose = () => {
     setOpen(false);

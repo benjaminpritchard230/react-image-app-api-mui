@@ -65,6 +65,14 @@ export const postsApi = createApi({
         body: credentials,
       }),
     }),
+    newPost: builder.mutation({
+      query: (data) => ({
+        url: "my_posts/",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Posts"],
+    }),
   }),
 });
 
@@ -78,4 +86,5 @@ export const {
   useDeleteMutation,
   useLoginMutation,
   useRegisterMutation,
+  useNewPostMutation,
 } = postsApi;
