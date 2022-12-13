@@ -1,7 +1,7 @@
 import PostCard from "./PostCard";
 import { useGetPublicPostsQuery } from "../features/api/apiSlice";
 
-const PublicPosts = ({ updatePosts, page }) => {
+const PublicPosts = ({ page }) => {
   const {
     data: publicPostsData,
     error,
@@ -13,7 +13,7 @@ const PublicPosts = ({ updatePosts, page }) => {
   const displayImagePosts = () => {
     if (!isLoading) {
       return publicPostsData.results.map((post) => (
-        <PostCard post={post} updatePosts={updatePosts} key={post.id} />
+        <PostCard post={post} key={post.id} />
       ));
     }
   };

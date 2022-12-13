@@ -13,7 +13,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../features/api/apiSlice";
 import { useDispatch } from "react-redux";

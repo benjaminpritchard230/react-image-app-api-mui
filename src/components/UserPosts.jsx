@@ -2,7 +2,7 @@ import PostCard from "./PostCard";
 import { useParams } from "react-router-dom";
 import { useGetUserPostsQuery } from "../features/api/apiSlice";
 
-const UserPosts = ({ updatePosts, publicPostList }) => {
+const UserPosts = ({ publicPostList }) => {
   const postsUrl = "http://localhost:8000/all_posts/";
   const { id } = useParams();
   const {
@@ -16,7 +16,7 @@ const UserPosts = ({ updatePosts, publicPostList }) => {
   const displayImagePosts = () => {
     if (!isLoading) {
       return userPostsData.map((post) => (
-        <PostCard post={post} updatePosts={updatePosts} key={post.id} />
+        <PostCard post={post} key={post.id} />
       ));
     }
   };

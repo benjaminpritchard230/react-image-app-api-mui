@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import PrivatePostCard from "./PrivatePostCard";
 import { useGetPrivatePostsQuery } from "../features/api/apiSlice";
 import { useSelector } from "react-redux";
-const PrivatePosts = ({ updatePosts, privatePostList }) => {
+const PrivatePosts = ({ privatePostList }) => {
   const auth = useSelector((state) => state.auth);
   const token = auth.token;
   const {
@@ -12,14 +12,11 @@ const PrivatePosts = ({ updatePosts, privatePostList }) => {
     isLoading,
   } = useGetPrivatePostsQuery();
   console.log(privatePostsData, "ppd");
-  useEffect(() => {
-    updatePosts();
-  }, []);
 
   const displayImagePosts = () => {
     if (!isLoading && privatePostsData) {
       return privatePostsData.map((post) => (
-        <PrivatePostCard post={post} updatePosts={updatePosts} key={post.id} />
+        <PrivatePostCard post={post} key={post.id} />
       ));
     }
   };

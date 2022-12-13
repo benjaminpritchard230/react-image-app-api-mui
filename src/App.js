@@ -76,10 +76,6 @@ function App() {
     }
   };
 
-  const updatePosts = () => {
-    updatePrivatePosts();
-  };
-
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <CssBaseline />
@@ -111,23 +107,14 @@ function App() {
                 path={"/"}
                 element={
                   <>
-                    <PublicPosts
-                      publicPostList={publicPostList}
-                      updatePosts={updatePosts}
-                      page={page}
-                    />
+                    <PublicPosts publicPostList={publicPostList} page={page} />
                     <PaginationButtons page={page} setPage={setPage} />
                   </>
                 }
               />
               <Route
                 path={"/private"}
-                element={
-                  <PrivatePosts
-                    privatePostList={privatePostList}
-                    updatePosts={updatePosts}
-                  />
-                }
+                element={<PrivatePosts privatePostList={privatePostList} />}
               />
               <Route path={"/login"} element={<Login />} />
               <Route path={"/register"} element={<Register />} />
@@ -147,7 +134,6 @@ function App() {
         <NewPostDialog
           newPostDialog={newPostDialog}
           setNewPostDialog={setNewPostDialog}
-          updatePosts={updatePosts}
         />
       </Router>
     </ThemeProvider>

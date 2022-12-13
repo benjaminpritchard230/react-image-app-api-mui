@@ -13,7 +13,7 @@ import TogglePrivateSwitch from "./TogglePrivateSwitch";
 import Stack from "@mui/material/Stack";
 import DeletePostButton from "./DeletePostButton";
 
-export default function PrivatePostCard({ post, updatePosts }) {
+export default function PrivatePostCard({ post }) {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -75,11 +75,7 @@ export default function PrivatePostCard({ post, updatePosts }) {
               spacing={1}
             >
               <DeletePostButton post={post} />
-              <TogglePrivateSwitch
-                post={post}
-                updatePosts={updatePosts}
-                key={post.id}
-              />
+              <TogglePrivateSwitch post={post} key={post.id} />
             </Stack>
           </CardActions>
         </Card>

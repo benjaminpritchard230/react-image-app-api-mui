@@ -6,18 +6,13 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import axios from "axios";
 import { useContext } from "react";
 import { Snackbar } from "@mui/material";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNewPostMutation } from "../features/api/apiSlice";
 import MyDropzone from "./MyDropzone";
-export default function NewPostDialog({
-  newPostDialog,
-  setNewPostDialog,
-  updatePosts,
-}) {
+export default function NewPostDialog({ newPostDialog, setNewPostDialog }) {
   const auth = useSelector((state) => state.auth);
 
   const token = auth.token;
