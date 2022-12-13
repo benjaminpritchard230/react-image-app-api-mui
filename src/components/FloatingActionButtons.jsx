@@ -1,9 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
-import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
+
 import Tooltip from "@mui/material/Tooltip";
 import { useSelector } from "react-redux";
 import PostAddIcon from "@mui/icons-material/PostAdd";

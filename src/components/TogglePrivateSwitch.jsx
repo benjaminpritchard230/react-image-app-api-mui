@@ -7,7 +7,6 @@ import { useMakePrivateMutation } from "../features/api/apiSlice";
 
 export default function TogglePrivateSwitch({ post }) {
   const auth = useSelector((state) => state.auth);
-  const token = auth.token;
   const [checked, setChecked] = useState(post.public === true ? false : true);
   const [makePrivate, { isLoading }] = useMakePrivateMutation();
 

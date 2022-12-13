@@ -10,13 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import { useLocation } from "react-router-dom";
 import { setCredentials } from "../features/auth/authSlice";
-
-import {
-  updateUsername,
-  updateToken,
-  clearUser,
-} from "../features/user/userSlice";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PrivatePostsButton from "./PrivatePostsButton";
 
 export default function ButtonAppBar() {

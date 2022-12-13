@@ -13,13 +13,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
-import {
-  updateUsername,
-  updateToken,
-  updateId,
-} from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useLoginMutation } from "../features/api/apiSlice";
 import { setCredentials } from "../features/auth/authSlice";
 import { useState } from "react";

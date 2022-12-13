@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useGetUserPostsQuery } from "../features/api/apiSlice";
 
 const UserPosts = ({ publicPostList }) => {
-  const postsUrl = "http://localhost:8000/all_posts/";
   const { id } = useParams();
   const {
     data: userPostsData,

@@ -6,10 +6,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useContext } from "react";
 import { Snackbar } from "@mui/material";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNewPostMutation } from "../features/api/apiSlice";
 import MyDropzone from "./MyDropzone";
 export default function NewPostDialog({ newPostDialog, setNewPostDialog }) {
@@ -59,7 +58,7 @@ export default function NewPostDialog({ newPostDialog, setNewPostDialog }) {
               fullWidth
               variant="standard"
             />
-            {/* <input type="file" id="image_url" label="Image" name="image_url" /> */}
+
             <MyDropzone
               inputProps={{
                 id: "image_url",

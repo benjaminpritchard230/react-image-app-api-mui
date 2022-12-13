@@ -12,9 +12,7 @@ const PublicPosts = ({ page }) => {
 
   const displayImagePosts = () => {
     if (!isLoading) {
-      return publicPostsData.results.map((post) => (
-        <PostCard post={post} key={post.id} />
-      ));
+      return publicPostsData.results.map((post) => <PostCard key={post.id} />);
     }
   };
   return <>{displayImagePosts()}</>;
