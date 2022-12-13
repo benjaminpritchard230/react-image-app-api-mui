@@ -12,7 +12,7 @@ export default function TogglePrivateSwitch({ post }) {
   const [makePrivate, { isLoading }] = useMakePrivateMutation();
 
   const handleChange = () => {
-    setChecked(!checked);
+    // setChecked(!checked);
     makePrivate(post);
   };
 

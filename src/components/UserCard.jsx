@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { useParams } from "react-router-dom";
 import { useGetUserInfoQuery } from "../features/api/apiSlice";
 
-export default function UserCard({ setUserId }) {
+export default function UserCard({}) {
   const { id } = useParams();
   const {
     data: userInfoData,

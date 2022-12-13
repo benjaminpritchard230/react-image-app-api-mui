@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import PrivatePostCard from "./PrivatePostCard";
 import { useGetPrivatePostsQuery } from "../features/api/apiSlice";
 import { useSelector } from "react-redux";
-const PrivatePosts = ({ privatePostList }) => {
+const PrivatePosts = ({}) => {
   const auth = useSelector((state) => state.auth);
   const token = auth.token;
   const {

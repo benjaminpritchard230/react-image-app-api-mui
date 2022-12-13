@@ -42,7 +42,7 @@ export const postsApi = createApi({
         method: "PUT",
         body: { caption: post.caption, public: !post.public },
       }),
-      // invalidatesTags: ["Posts"],
+      invalidatesTags: ["Posts"],
     }),
     delete: builder.mutation({
       query: (id) => ({
