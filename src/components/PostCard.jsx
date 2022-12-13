@@ -57,7 +57,7 @@ export default function PostCard({ post }) {
         <Card sx={{ minHeight: 150 }}>
           <CardContent sx={{ minHeight: 150 }}>
             <Typography variant="body2" color="text.secondary">
-              {post.caption}
+              {capitalizeString(post.caption)}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Posted by{" "}

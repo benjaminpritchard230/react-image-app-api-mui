@@ -15,6 +15,7 @@ import FloatingActionButtons from "./components/FloatingActionButtons";
 import NewPostDialog from "./components/NewPostDialog";
 import PaginationButtons from "./components/PaginationButtons";
 import UserPosts from "./components/UserPosts";
+import { useSelector, useDispatch } from "react-redux";
 
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
@@ -34,7 +35,7 @@ function App() {
     },
   });
 
-  const theme = "light";
+  const theme = useSelector((state) => state.theme.theme);
   const [newPostDialog, setNewPostDialog] = useState(false);
   const [page, setPage] = useState(1);
 

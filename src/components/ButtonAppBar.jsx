@@ -12,6 +12,10 @@ import { useLocation } from "react-router-dom";
 import { setCredentials } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import PrivatePostsButton from "./PrivatePostsButton";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import Tooltip from "@mui/material/Tooltip";
+import { toggleTheme } from "../features/theme/themeSlice";
 
 export default function ButtonAppBar() {
   const dispatch = useDispatch();
@@ -19,6 +23,8 @@ export default function ButtonAppBar() {
   const token = auth.token;
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useSelector((state) => state.theme.theme);
+
   console.log(location);
 
   const handleLogoutClick = () => {
@@ -49,6 +55,27 @@ export default function ButtonAppBar() {
           >
             Image App
           </Typography>
+          {theme === "dark" ? (
+            <Tooltip title="Light mode" placement="left">
+              <IconButton
+                onClick={() => {
+                  dispatch(toggleTheme());
+                }}
+              >
+                <Brightness7Icon />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Dark mode" placement="left">
+              <IconButton
+                onClick={() => {
+                  dispatch(toggleTheme());
+                }}
+              >
+                <Brightness4Icon />
+              </IconButton>
+            </Tooltip>
+          )}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {auth.username}
           </Typography>
