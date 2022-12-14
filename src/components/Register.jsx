@@ -14,7 +14,8 @@ import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../features/api/apiSlice";
 import { useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { setSnackBar } from "../features/snack/snackSlice";
 function Copyright(props) {
   return (
     <Typography
@@ -37,6 +38,7 @@ const theme = createTheme();
 
 export default function Register() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [register, { isLoading }] = useRegisterMutation();
   const [formState, setFormState] = useState({
     username: "",
@@ -51,6 +53,12 @@ export default function Register() {
       const user = await register(formState).unwrap();
       navigate("/login");
       console.log(user, "user");
+      dispatch(
+        setSnackBar({
+          snackMessage: "New user created.",
+          snackOpen: true,
+        })
+      );
     } catch (err) {
       console.log(err);
     }

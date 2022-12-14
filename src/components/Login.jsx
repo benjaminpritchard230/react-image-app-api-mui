@@ -19,6 +19,7 @@ import { useLoginMutation } from "../features/api/apiSlice";
 import { setCredentials } from "../features/auth/authSlice";
 import { useState } from "react";
 import { setSnackBar } from "../features/snack/snackSlice";
+import { List, ListItem, ListItemText } from "@mui/material";
 
 function Copyright(props) {
   return (
@@ -68,7 +69,7 @@ export default function Login() {
       console.log(err);
       dispatch(
         setSnackBar({
-          snackMessage: err.data.non_field_errors[0],
+          snackMessage: "Unable to log in.",
           snackOpen: true,
         })
       );
@@ -130,6 +131,11 @@ export default function Login() {
             >
               Sign In
             </Button>
+            <List>
+              <ListItem>
+                <ListItemText>list item text</ListItemText>
+              </ListItem>
+            </List>
 
             <Grid container>
               <Grid item xs>
