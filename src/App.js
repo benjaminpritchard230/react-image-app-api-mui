@@ -16,7 +16,8 @@ import NewPostDialog from "./components/NewPostDialog";
 import PaginationButtons from "./components/PaginationButtons";
 import UserPosts from "./components/UserPosts";
 import { useSelector, useDispatch } from "react-redux";
-
+import SimpleSnackbar from "./components/SimpleSnackbar";
+import { setSnackBar } from "./features/snack/snackSlice";
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
 
@@ -34,7 +35,7 @@ function App() {
       },
     },
   });
-
+  const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.theme);
   const [newPostDialog, setNewPostDialog] = useState(false);
   const [page, setPage] = useState(1);
@@ -43,6 +44,24 @@ function App() {
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <CssBaseline />
       <Router>
+        <button
+          onClick={() => {
+            dispatch(
+              setSnackBar({ snackMessage: "i like snack", snackOpen: true })
+            );
+          }}
+        >
+          hmm snacks
+        </button>
+        <button
+          onClick={() => {
+            dispatch(
+              setSnackBar({ snackMessage: "no snacks", snackOpen: true })
+            );
+          }}
+        >
+          no snacks
+        </button>
         <ButtonAppBar />
         <Box sx={{ flexGrow: 1, minWidth: 1 }} key="1">
           <Grid container spacing={0}>
@@ -77,6 +96,7 @@ function App() {
           newPostDialog={newPostDialog}
           setNewPostDialog={setNewPostDialog}
         />
+        <SimpleSnackbar />
       </Router>
     </ThemeProvider>
   );

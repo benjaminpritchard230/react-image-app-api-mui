@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import { useLoginMutation } from "../features/api/apiSlice";
 import { setCredentials } from "../features/auth/authSlice";
 import { useState } from "react";
+import { setSnackBar } from "../features/snack/snackSlice";
 
 function Copyright(props) {
   return (
@@ -57,8 +58,20 @@ export default function Login() {
       dispatch(setCredentials(user));
       navigate("/");
       console.log(user, "user");
+      dispatch(
+        setSnackBar({
+          snackMessage: `Logged in succesfully.`,
+          snackOpen: true,
+        })
+      );
     } catch (err) {
       console.log(err);
+      dispatch(
+        setSnackBar({
+          snackMessage: err.data.non_field_errors[0],
+          snackOpen: true,
+        })
+      );
     }
   };
 
