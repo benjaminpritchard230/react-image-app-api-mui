@@ -8,11 +8,14 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Snackbar } from "@mui/material";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNewPostMutation } from "../features/api/apiSlice";
+import { setSnackBar } from "../features/snack/snackSlice";
+
 import MyDropzone from "./MyDropzone";
 export default function NewPostDialog({ newPostDialog, setNewPostDialog }) {
   const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const token = auth.token;
 
@@ -20,13 +23,31 @@ export default function NewPostDialog({ newPostDialog, setNewPostDialog }) {
   const [image, setImage] = useState();
   const [newPost, { isLoading }] = useNewPostMutation();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setNewPostDialog(false);
     const data = new FormData(e.target);
     data.append("public", true);
     console.log(data, "data");
-    newPost(data);
+    try {
+      await newPost(data).unwrap();
+      dispatch(
+        setSnackBar({
+          snackMessage: "New post created",
+          snackOpen: true,
+          snackSeverity: "success",
+        })
+      );
+    } catch (err) {
+      console.log(err, "err");
+      dispatch(
+        setSnackBar({
+          snackMessage: "Unable to create new post.",
+          snackOpen: true,
+          snackSeverity: "error",
+        })
+      );
+    }
   };
   const handleClose = () => {
     setOpen(false);

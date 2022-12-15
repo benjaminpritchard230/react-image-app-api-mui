@@ -63,6 +63,7 @@ export default function Login() {
         setSnackBar({
           snackMessage: `Logged in succesfully.`,
           snackOpen: true,
+          snackSeverity: "success",
         })
       );
     } catch (err) {
@@ -71,6 +72,7 @@ export default function Login() {
         setSnackBar({
           snackMessage: "Unable to log in.",
           snackOpen: true,
+          snackSeverity: "error",
         })
       );
     }

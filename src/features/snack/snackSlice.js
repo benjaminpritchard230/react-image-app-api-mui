@@ -2,11 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const snackSlice = createSlice({
   name: "snack",
-  initialState: { snackMessage: "Default message", snackOpen: false },
+  initialState: {
+    snackMessage: "Default message",
+    snackOpen: false,
+    snackSeverity: "info",
+  },
   reducers: {
-    setSnackBar: (state, { payload: { snackMessage, snackOpen } }) => {
+    setSnackBar: (
+      state,
+      { payload: { snackMessage, snackOpen, snackSeverity } }
+    ) => {
       state.snackMessage = snackMessage;
       state.snackOpen = snackOpen;
+      state.snackSeverity = snackSeverity;
     },
   },
 });
