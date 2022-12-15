@@ -44,24 +44,6 @@ function App() {
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <CssBaseline />
       <Router>
-        <button
-          onClick={() => {
-            dispatch(
-              setSnackBar({ snackMessage: "i like snack", snackOpen: true })
-            );
-          }}
-        >
-          hmm snacks
-        </button>
-        <button
-          onClick={() => {
-            dispatch(
-              setSnackBar({ snackMessage: "no snacks", snackOpen: true })
-            );
-          }}
-        >
-          no snacks
-        </button>
         <ButtonAppBar />
         <Box sx={{ flexGrow: 1, minWidth: 1 }} key="1">
           <Grid container spacing={0}>
