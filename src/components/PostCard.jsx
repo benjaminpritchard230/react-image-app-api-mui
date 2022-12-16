@@ -11,7 +11,9 @@ import Link from "@mui/material/Link";
 import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
 import LikeButton from "./LikeButton";
 import { useSelector, useDispatch } from "react-redux";
-
+import PostCommentsToggle from "./PostCommentsToggle";
+import { useState } from "react";
+import CommentsDialog from "./CommentsDialog";
 export default function PostCard({ post }) {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -22,6 +24,7 @@ export default function PostCard({ post }) {
   }));
 
   const dispatch = useDispatch();
+  const [commentsDialog, setCommentsDialog] = useState(false);
   const auth = useSelector((state) => state.auth);
   const token = auth.token;
   const userUrl = `user/${post.user}/`;
@@ -70,9 +73,22 @@ export default function PostCard({ post }) {
           <CardActions>
             {/* <PostCardButtons post={post} handleLikeClick={handleLikeClick} /> */}
             <LikeButton post={post} token={token} username={auth.username} />
+            <PostCommentsToggle
+              post={post}
+              token={token}
+              username={auth.username}
+              commentsDialog={commentsDialog}
+              setCommentsDialog={setCommentsDialog}
+            />
           </CardActions>
         </Card>
       </Item>
+      <CommentsDialog
+        key={post.id}
+        post={post}
+        commentsDialog={commentsDialog}
+        setCommentsDialog={setCommentsDialog}
+      />
     </Grid>
   );
 }

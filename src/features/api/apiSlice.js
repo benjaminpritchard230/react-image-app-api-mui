@@ -29,6 +29,9 @@ export const postsApi = createApi({
     getUserInfo: builder.query({
       query: (id) => `user/${id}/`,
     }),
+    getPostComments: builder.query({
+      query: (id) => `posts/${id}/comments/`,
+    }),
     like: builder.mutation({
       query: (id) => ({
         url: `posts/${id}/like/`,
@@ -81,6 +84,7 @@ export const {
   useGetPrivatePostsQuery,
   useGetUserPostsQuery,
   useGetUserInfoQuery,
+  useGetPostCommentsQuery,
   useLikeMutation,
   useMakePrivateMutation,
   useDeleteMutation,
