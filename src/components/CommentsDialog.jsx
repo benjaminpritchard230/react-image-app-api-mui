@@ -10,6 +10,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import CommentAdd from "./CommentAdd";
 const style = {
   position: "absolute",
   top: "50%",
@@ -43,7 +44,7 @@ export default function CommentsDialog({
   const displayComments = () => {
     if (!isLoading) {
       return postCommentsData.map((comment) => (
-        <CommentDisplay comment={comment} />
+        <CommentDisplay comment={comment} key={comment.id} />
       ));
     }
   };
@@ -60,7 +61,9 @@ export default function CommentsDialog({
         <DialogContent>
           <DialogContentText></DialogContentText>
           {displayComments()}
+          <CommentAdd post={post} />
         </DialogContent>
+
         <DialogActions>
           <Button
             onClick={() => {
