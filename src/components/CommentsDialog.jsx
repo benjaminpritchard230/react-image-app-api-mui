@@ -4,7 +4,12 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useGetPostCommentsQuery } from "../features/api/apiSlice";
-
+import CommentDisplay from "./CommentDisplay";
+import { Dialog } from "@mui/material";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 const style = {
   position: "absolute",
   top: "50%",
@@ -35,23 +40,37 @@ export default function CommentsDialog({
     console.log(postCommentsData, "comments");
   }
 
+  const displayComments = () => {
+    if (!isLoading) {
+      return postCommentsData.map((comment) => (
+        <CommentDisplay comment={comment} />
+      ));
+    }
+  };
+
   return (
     <div>
-      <Modal
+      <Dialog
         open={commentsDialog}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
+        <DialogTitle></DialogTitle>
+        <DialogContent>
+          <DialogContentText></DialogContentText>
+          {displayComments()}
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
