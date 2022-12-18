@@ -13,8 +13,8 @@ const snackSlice = createSlice({
       { payload: { snackMessage, snackOpen, snackSeverity } }
     ) => {
       state.snackMessage = snackMessage;
-      state.snackOpen = snackOpen;
       state.snackSeverity = snackSeverity;
+      state.snackOpen = snackOpen;
     },
   },
 });

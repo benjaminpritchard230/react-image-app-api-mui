@@ -2,9 +2,14 @@ import { Avatar, Button, Card, Stack, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { useAddCommentMutation } from "../features/api/apiSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { setSnackBar } from "../features/snack/snackSlice";
 
-export default function ({ post }) {
-  const [formState, setFormState] = useState({ body: "hello" });
+export default function ({ post, handleClose }) {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const token = auth.token;
+  const [formState, setFormState] = useState({ body: "" });
   const [addComment, { isLoading }] = useAddCommentMutation();
 
   const handleChange = ({ target: { name, value } }) => {
@@ -15,10 +20,27 @@ export default function ({ post }) {
   const id = post.id;
 
   const handleAddCommentClick = async () => {
-    try {
-      await addComment({ id: id, body: formState }).unwrap();
-    } catch (err) {
-      console.log(err);
+    if (auth.token.length > 0) {
+      try {
+        await addComment({ id: id, body: formState }).unwrap();
+        dispatch(
+          setSnackBar({
+            snackMessage: `Comment added.`,
+            snackOpen: true,
+            snackSeverity: "success",
+          })
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      dispatch(
+        setSnackBar({
+          snackMessage: `Log in to leave a comment.`,
+          snackOpen: true,
+          snackSeverity: "warning",
+        })
+      );
     }
   };
   return (
@@ -27,7 +49,6 @@ export default function ({ post }) {
         <Stack direction="row" spacing={2} alignItems="flex-start">
           <Avatar
             src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-            variant="rounded"
             alt="user-avatar"
           />
           <TextField
@@ -36,19 +57,29 @@ export default function ({ post }) {
             minRows={4}
             id="body"
             name="body"
-            label="Body"
+            label="Enter comment..."
             type="text"
-            placeholder="Type your comment here..."
             onChange={handleChange}
           />
           <Button
             size="large"
             sx={{ mt: 3, mb: 2 }}
             onClick={() => {
-              handleAddCommentClick();
+              if (formState.body.length > 0) {
+                handleAddCommentClick();
+              }
             }}
           >
-            Add comment
+            Post
+          </Button>
+          <Button
+            size="large"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            Close
           </Button>
         </Stack>
       </Box>

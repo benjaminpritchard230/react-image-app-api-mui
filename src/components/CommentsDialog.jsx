@@ -16,7 +16,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 600,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -60,18 +60,13 @@ export default function CommentsDialog({
         <DialogTitle></DialogTitle>
         <DialogContent>
           <DialogContentText></DialogContentText>
-          {displayComments()}
-          <CommentAdd post={post} />
+          {post.comments.length > 0
+            ? displayComments()
+            : "Be the first to comment!"}
         </DialogContent>
 
         <DialogActions>
-          <Button
-            onClick={() => {
-              handleClose();
-            }}
-          >
-            Cancel
-          </Button>
+          <CommentAdd post={post} handleClose={handleClose} />
         </DialogActions>
       </Dialog>
     </div>
