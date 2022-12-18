@@ -14,10 +14,12 @@ const PrivatePosts = ({}) => {
   console.log(privatePostsData, "ppd");
 
   const displayImagePosts = () => {
-    if (!isLoading && privatePostsData) {
+    if (!isLoading && token.length > 0) {
       return privatePostsData.map((post) => (
         <PrivatePostCard post={post} key={post.id} />
       ));
+    } else {
+      return "Log in to view private posts.";
     }
   };
   return <>{displayImagePosts()}</>;

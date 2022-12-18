@@ -1,4 +1,5 @@
 import { Divider, Avatar, Grid, Paper } from "@mui/material";
+import CommentLikeButton from "./CommentLikeButton";
 const imgLink =
   "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260";
 
@@ -15,6 +16,7 @@ export default function CommentDisplay({ comment }) {
           <p style={{ textAlign: "left", color: "gray" }}>
             {comment.created_on}
           </p>
+          <CommentLikeButton comment={comment} key={comment.id} />
         </Grid>
       </Grid>
       <Divider variant="fullWidth" style={{ margin: "30px 0" }} />

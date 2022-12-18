@@ -85,6 +85,13 @@ export const postsApi = createApi({
       }),
       invalidatesTags: ["Posts", "Comments"],
     }),
+    likeComment: builder.mutation({
+      query: (id) => ({
+        url: `comments/${id}/like/`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["Comments"],
+    }),
   }),
 });
 
@@ -101,4 +108,5 @@ export const {
   useRegisterMutation,
   useNewPostMutation,
   useAddCommentMutation,
+  useLikeCommentMutation,
 } = postsApi;
