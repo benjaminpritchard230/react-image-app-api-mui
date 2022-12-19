@@ -14,6 +14,8 @@ import { useSelector, useDispatch } from "react-redux";
 import PostCommentsToggle from "./PostCommentsToggle";
 import { useState } from "react";
 import CommentsDialog from "./CommentsDialog";
+import ReactTimeAgo from "react-time-ago";
+
 export default function PostCard({ post }) {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -67,7 +69,7 @@ export default function PostCard({ post }) {
               <Link component={RouterLink} to={userUrl} variant="body2">
                 {post.author}
               </Link>{" "}
-              at {post.created_on}
+              <ReactTimeAgo date={Date.parse(post.created_on)} />
             </Typography>
           </CardContent>
           <CardActions>

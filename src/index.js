@@ -7,6 +7,11 @@ import store from "./app/store";
 import { Provider } from "react-redux";
 import { ApiProvider } from "@reduxjs/toolkit/query/react";
 import { postsApi } from "./features/api/apiSlice";
+import TimeAgo from "javascript-time-ago";
+
+import en from "javascript-time-ago/locale/en.json";
+
+TimeAgo.addDefaultLocale(en);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
