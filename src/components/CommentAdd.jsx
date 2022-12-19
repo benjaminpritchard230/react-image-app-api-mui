@@ -30,6 +30,7 @@ export default function ({ post, handleClose }) {
             snackSeverity: "success",
           })
         );
+        setFormState({ body: "" });
       } catch (err) {
         console.log(err);
       }
@@ -64,6 +65,7 @@ export default function ({ post, handleClose }) {
             name="body"
             label="Enter comment..."
             type="text"
+            value={formState.body}
             onChange={handleChange}
           />
           <Button
