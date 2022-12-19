@@ -82,13 +82,6 @@ export default function CommentsDialog({
 
         <DialogActions>
           <CommentAdd post={post} handleClose={handleClose} />
-          <button
-            onClick={() => {
-              scrollToBottom();
-            }}
-          >
-            scroll
-          </button>
         </DialogActions>
       </Dialog>
     </div>
