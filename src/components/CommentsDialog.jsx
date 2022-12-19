@@ -11,6 +11,9 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import CommentAdd from "./CommentAdd";
+import { useRef, useEffect } from "react";
+import CommentsList from "./CommentsList";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -30,6 +33,16 @@ export default function CommentsDialog({
 }) {
   const handleOpen = () => setCommentsDialog(true);
   const handleClose = () => setCommentsDialog(false);
+
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, []);
 
   const {
     data: postCommentsData,
@@ -59,14 +72,23 @@ export default function CommentsDialog({
       >
         <DialogTitle></DialogTitle>
         <DialogContent>
-          <DialogContentText></DialogContentText>
-          {post.comments.length > 0
-            ? displayComments()
-            : "Be the first to comment!"}
+          {/* <DialogContentText></DialogContentText> */}
+          {post.comments.length > 0 ? (
+            <CommentsList post={post} />
+          ) : (
+            "Be the first to comment!"
+          )}
         </DialogContent>
 
         <DialogActions>
           <CommentAdd post={post} handleClose={handleClose} />
+          <button
+            onClick={() => {
+              scrollToBottom();
+            }}
+          >
+            scroll
+          </button>
         </DialogActions>
       </Dialog>
     </div>
