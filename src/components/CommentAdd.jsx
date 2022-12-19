@@ -44,7 +44,11 @@ export default function ({ post, handleClose }) {
     }
   };
   return (
-    <Card>
+    <Card
+      sx={{
+        width: "100%",
+      }}
+    >
       <Box sx={{ p: "15px" }}>
         <Stack direction="row" spacing={2} alignItems="flex-start">
           <Avatar
@@ -63,7 +67,7 @@ export default function ({ post, handleClose }) {
           />
           <Button
             size="large"
-            sx={{ mt: 3, mb: 2 }}
+            // sx={{ mt: 3, mb: 2 }}
             onClick={() => {
               if (formState.body.length > 0) {
                 handleAddCommentClick();
@@ -74,7 +78,7 @@ export default function ({ post, handleClose }) {
           </Button>
           <Button
             size="large"
-            sx={{ mt: 3, mb: 2 }}
+            // sx={{ mt: 3, mb: 2 }}
             onClick={() => {
               handleClose();
             }}

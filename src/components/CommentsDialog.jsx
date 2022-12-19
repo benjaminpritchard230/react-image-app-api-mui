@@ -63,27 +63,27 @@ export default function CommentsDialog({
   };
 
   return (
-    <div>
-      <Dialog
-        open={commentsDialog}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <DialogTitle></DialogTitle>
-        <DialogContent>
-          {/* <DialogContentText></DialogContentText> */}
-          {post.comments.length > 0 ? (
-            <CommentsList post={post} />
-          ) : (
-            "Be the first to comment!"
-          )}
-        </DialogContent>
+    <Dialog
+      open={commentsDialog}
+      onClose={handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+      fullWidth
+      maxWidth="md"
+    >
+      <DialogTitle></DialogTitle>
+      <DialogContent>
+        {/* <DialogContentText></DialogContentText> */}
+        {post.comments.length > 0 ? (
+          <CommentsList post={post} />
+        ) : (
+          "Be the first to comment!"
+        )}
+      </DialogContent>
 
-        <DialogActions>
-          <CommentAdd post={post} handleClose={handleClose} />
-        </DialogActions>
-      </Dialog>
-    </div>
+      <DialogActions>
+        <CommentAdd post={post} handleClose={handleClose} />
+      </DialogActions>
+    </Dialog>
   );
 }
