@@ -5,7 +5,7 @@ const imgLink =
 
 export default function CommentDisplay({ comment }) {
   return (
-    <Paper style={{ padding: "15px 10px" }}>
+    <Paper elevation={0} style={{ padding: "15px 10px" }}>
       <Grid container wrap="nowrap" spacing={2}>
         <Grid item>
           <Avatar alt="Remy Sharp" src={imgLink} />

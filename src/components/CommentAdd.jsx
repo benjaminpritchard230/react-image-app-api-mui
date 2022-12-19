@@ -48,9 +48,10 @@ export default function ({ post, handleClose }) {
       sx={{
         width: "100%",
       }}
+      elevation={1}
     >
       <Box sx={{ p: "15px" }}>
-        <Stack direction="row" spacing={2} alignItems="flex-start">
+        <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
           <Avatar
             src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
             alt="user-avatar"
