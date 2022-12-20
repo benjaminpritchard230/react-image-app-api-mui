@@ -76,7 +76,7 @@ export default function ButtonAppBar() {
               </IconButton>
             </Tooltip>
           )}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          {/* <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {auth.username}
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -84,7 +84,7 @@ export default function ButtonAppBar() {
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {auth.token}
-          </Typography>
+          </Typography> */}
 
           {token.length > 0 ? (
             <>
