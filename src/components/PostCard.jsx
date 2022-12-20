@@ -15,11 +15,8 @@ import PostCommentsToggle from "./PostCommentsToggle";
 import { useState } from "react";
 import CommentsDialog from "./CommentsDialog";
 import ReactTimeAgo from "react-time-ago";
-import { Stack } from "@mui/system";
-import CardMedia from "@mui/material/CardMedia";
-import DeletePostButton from "./DeletePostButton";
-import TogglePrivateSwitch from "./TogglePrivateSwitch";
-export default function PostCard({ post, isPrivate }) {
+
+export default function PostCard({ post }) {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -37,6 +34,7 @@ export default function PostCard({ post, isPrivate }) {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
 
+  // console.log(post.likes);
   return (
     <Grid
       item
@@ -62,50 +60,28 @@ export default function PostCard({ post, isPrivate }) {
     >
       <Item sx={{ m: 0.5 }}>
         <Card sx={{ minHeight: 150 }}>
-          <CardMedia
-            component="img"
-            image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
-            alt="green iguana"
-          />
-          <CardContent>
+          <CardContent sx={{ minHeight: 150 }}>
             <Typography variant="body2" color="text.secondary">
-              "{capitalizeString(post.caption)}" posted by{" "}
+              {capitalizeString(post.caption)}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Posted by{" "}
               <Link component={RouterLink} to={userUrl} variant="body2">
-                {capitalizeString(post.author)}
+                {post.author}
               </Link>{" "}
               <ReactTimeAgo date={Date.parse(post.created_on)} />
             </Typography>
           </CardContent>
           <CardActions>
-            {isPrivate ? (
-              <>
-                <LikeButton post={post} token={""} username={auth.username} />
-                <PostCommentsToggle
-                  post={post}
-                  token={""}
-                  username={auth.username}
-                  commentsDialog={commentsDialog}
-                  setCommentsDialog={setCommentsDialog}
-                />
-                <DeletePostButton post={post} />
-                <TogglePrivateSwitch post={post} key={post.id} />
-              </>
-            ) : (
-              <>
-                <LikeButton
-                  post={post}
-                  token={token}
-                  username={auth.username}
-                />
-                <PostCommentsToggle
-                  post={post}
-                  token={token}
-                  username={auth.username}
-                  commentsDialog={commentsDialog}
-                  setCommentsDialog={setCommentsDialog}
-                />
-              </>
-            )}
+            {/* <PostCardButtons post={post} handleLikeClick={handleLikeClick} /> */}
+            <LikeButton post={post} token={token} username={auth.username} />
+            <PostCommentsToggle
+              post={post}
+              token={token}
+              username={auth.username}
+              commentsDialog={commentsDialog}
+              setCommentsDialog={setCommentsDialog}
+            />
           </CardActions>
         </Card>
       </Item>

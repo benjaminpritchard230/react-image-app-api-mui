@@ -118,14 +118,7 @@ export default function ButtonAppBar() {
               </Button>
             </>
           )}
-          {token.length > 0 ? (
-            <Avatar
-              src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-              alt="user-avatar"
-            />
-          ) : (
-            <Avatar alt={auth.username} src="/static/images/avatar/2.jpg" />
-          )}
+          <Avatar alt={auth.username} src="/static/images/avatar/2.jpg" />
         </Toolbar>
       </AppBar>
     </Box>
