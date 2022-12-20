@@ -6,7 +6,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useParams } from "react-router-dom";
 import { useGetUserInfoQuery } from "../features/api/apiSlice";
-
+import { Stack } from "@mui/system";
+import { Avatar } from "@mui/material";
 export default function UserCard({}) {
   const { id } = useParams();
   const {
@@ -18,26 +19,22 @@ export default function UserCard({}) {
   console.log(userInfoData);
 
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card
+      sx={{
+        width: "100%",
+      }}
+    >
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Word of the Day
-        </Typography>
-        <Typography variant="h5" component="div">
-          {!isLoading ? userInfoData.username : "Loading..."}
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
-        </Typography>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
+        <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+          <Avatar
+            src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+            alt="user-avatar"
+          />
+          <Typography variant="h5" component="div">
+            {!isLoading ? userInfoData.username : "Loading..."}'s profile:
+          </Typography>
+        </Stack>
       </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   );
 }
