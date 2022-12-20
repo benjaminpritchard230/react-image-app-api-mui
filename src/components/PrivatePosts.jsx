@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import PrivatePostCard from "./PrivatePostCard";
+import PostCard from "./PostCard";
 import { useGetPrivatePostsQuery } from "../features/api/apiSlice";
 import { useSelector } from "react-redux";
 const PrivatePosts = ({}) => {
@@ -16,7 +17,7 @@ const PrivatePosts = ({}) => {
   const displayImagePosts = () => {
     if (!isLoading && token.length > 0) {
       return privatePostsData.map((post) => (
-        <PrivatePostCard post={post} key={post.id} />
+        <PostCard post={post} key={post.id} isPrivate={true} />
       ));
     } else {
       return "Log in to view private posts.";

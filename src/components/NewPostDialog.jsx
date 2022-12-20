@@ -11,6 +11,8 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNewPostMutation } from "../features/api/apiSlice";
 import { setSnackBar } from "../features/snack/snackSlice";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 import MyDropzone from "./MyDropzone";
 export default function NewPostDialog({ newPostDialog, setNewPostDialog }) {
@@ -50,7 +52,7 @@ export default function NewPostDialog({ newPostDialog, setNewPostDialog }) {
     }
   };
   const handleClose = () => {
-    setOpen(false);
+    setNewPostDialog(false);
   };
   return (
     <>
@@ -67,6 +69,19 @@ export default function NewPostDialog({ newPostDialog, setNewPostDialog }) {
       >
         <form onSubmit={handleSubmit}>
           <DialogTitle>Create a new post</DialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              position: "absolute",
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            {" "}
+            <CloseIcon />
+          </IconButton>
           <DialogContent>
             <DialogContentText></DialogContentText>
             <TextField

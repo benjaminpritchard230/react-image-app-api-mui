@@ -13,6 +13,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import CommentAdd from "./CommentAdd";
 import { useRef, useEffect } from "react";
 import CommentsList from "./CommentsList";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 
 const style = {
   position: "absolute",
@@ -71,7 +73,19 @@ export default function CommentsDialog({
       fullWidth
       maxWidth="md"
     >
-      <DialogTitle></DialogTitle>
+      <DialogTitle>Comments</DialogTitle>
+      <IconButton
+        aria-label="close"
+        onClick={handleClose}
+        sx={{
+          position: "absolute",
+          right: 8,
+          top: 8,
+          color: (theme) => theme.palette.grey[500],
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
       <DialogContent>
         {/* <DialogContentText></DialogContentText> */}
         {post.comments.length > 0 ? (
