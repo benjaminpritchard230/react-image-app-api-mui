@@ -66,6 +66,8 @@ export default function NewPostDialog({ newPostDialog, setNewPostDialog }) {
             },
           },
         }}
+        fullWidth
+        maxWidth="md"
       >
         <form onSubmit={handleSubmit}>
           <DialogTitle>Create a new post</DialogTitle>
