@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import PrivatePostCard from "./PrivatePostCard";
 import PostCard from "./PostCard";
 import { useGetPrivatePostsQuery } from "../features/api/apiSlice";
 import { useSelector } from "react-redux";
