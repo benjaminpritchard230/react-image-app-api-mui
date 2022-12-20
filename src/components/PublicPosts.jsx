@@ -13,7 +13,7 @@ const PublicPosts = ({ page }) => {
   const displayImagePosts = () => {
     if (!isLoading) {
       return publicPostsData.results.map((post) => (
-        <PostCard post={post} key={post.id} />
+        <PostCard post={post} key={post.id} isPrivate={false} />
       ));
     }
   };
