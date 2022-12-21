@@ -18,6 +18,7 @@ import UserPosts from "./components/UserPosts";
 import { useSelector, useDispatch } from "react-redux";
 import SimpleSnackbar from "./components/SimpleSnackbar";
 import { setSnackBar } from "./features/snack/snackSlice";
+import ResponsiveAppBar from "./components/ResponsiveAppBar";
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
 
@@ -44,7 +45,8 @@ function App() {
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <CssBaseline />
       <Router>
-        <ButtonAppBar />
+        {/* <ButtonAppBar /> */}
+        <ResponsiveAppBar />
         <Box sx={{ flexGrow: 1, minWidth: 1 }} key="1">
           <Grid container spacing={0}>
             <Grid item xs={12}></Grid>
@@ -54,7 +56,11 @@ function App() {
                 element={
                   <>
                     <PublicPosts page={page} />
-                    <PaginationButtons page={page} setPage={setPage} />
+                    <PaginationButtons
+                      page={page}
+                      setPage={setPage}
+                      position="static"
+                    />
                   </>
                 }
               />
