@@ -15,7 +15,6 @@ import PostCommentsToggle from "./PostCommentsToggle";
 import { useState } from "react";
 import CommentsDialog from "./CommentsDialog";
 import ReactTimeAgo from "react-time-ago";
-import { Stack } from "@mui/system";
 import CardMedia from "@mui/material/CardMedia";
 import DeletePostButton from "./DeletePostButton";
 import TogglePrivateSwitch from "./TogglePrivateSwitch";

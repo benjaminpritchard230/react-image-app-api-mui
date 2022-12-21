@@ -19,8 +19,6 @@ import { setCredentials } from "../features/auth/authSlice";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { toggleTheme } from "../features/theme/themeSlice";
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export default function ResponsiveAppBar() {
   const dispatch = useDispatch();

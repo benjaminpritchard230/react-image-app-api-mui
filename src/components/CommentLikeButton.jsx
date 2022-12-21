@@ -4,7 +4,6 @@ import Stack from "@mui/material/Stack";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
-import { useLikeMutation } from "../features/api/apiSlice";
 import { useLikeCommentMutation } from "../features/api/apiSlice";
 export default function CommentLikeButton({ comment }) {
   const auth = useSelector((state) => state.auth);
