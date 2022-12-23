@@ -7,6 +7,7 @@ import { useGetUserInfoQuery } from "../features/api/apiSlice";
 import { Stack } from "@mui/system";
 import { Avatar } from "@mui/material";
 import Divider from "@mui/material/Divider";
+import ReactTimeAgo from "react-time-ago";
 
 export default function UserCard({}) {
   const { id } = useParams();
@@ -16,7 +17,7 @@ export default function UserCard({}) {
     isError,
     isLoading,
   } = useGetUserInfoQuery(id);
-
+  console.log(userInfoData);
   const capitalizeString = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
@@ -44,30 +45,36 @@ export default function UserCard({}) {
               : "Loading..."}
           </Typography>
         </Stack>{" "}
-        <Stack
-          direction={{ xs: "column", xl: "row" }}
-          alignItems="center"
-          justifyContent="center"
-          spacing={{ xs: 1, xl: 3 }}
-          divider={<Divider orientation="vertical" flexItem />}
-          mt={2}
-        >
-          <Typography variant="h5" component="div">
-            Location: Warrington
-          </Typography>
-          <Typography variant="h5" component="div">
-            Joined: 23/4/2019
-          </Typography>
-          <Typography variant="h5" component="div">
-            Last seen: just now
-          </Typography>
-          <Typography variant="h5" component="div">
-            About me: Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Corporis dolor iure itaque cum sunt earum sed unde voluptas fugiat
-            optio! Porro, dolores. Facere commodi odio tempora optio
-            reprehenderit aut perferendis?
-          </Typography>
-        </Stack>
+        {!isLoading ? (
+          <Stack
+            direction={{ xs: "column", xl: "row" }}
+            alignItems="center"
+            justifyContent="center"
+            spacing={{ xs: 1, xl: 3 }}
+            divider={<Divider orientation="vertical" flexItem />}
+            mt={2}
+          >
+            <Typography variant="h5" component="div">
+              {!isLoading && userInfoData.location
+                ? capitalizeString(userInfoData.location)
+                : null}
+            </Typography>
+            <Typography variant="h5" component="div">
+              Joined{" "}
+              {<ReactTimeAgo date={Date.parse(userInfoData.date_joined)} />}
+            </Typography>
+            <Typography variant="h5" component="div">
+              Last seen{" "}
+              {<ReactTimeAgo date={Date.parse(userInfoData.last_login)} />}
+            </Typography>
+            <Typography variant="h5" component="div">
+              About:{" "}
+              {!isLoading && userInfoData.about_me
+                ? capitalizeString(userInfoData.about_me)
+                : null}
+            </Typography>
+          </Stack>
+        ) : null}
       </CardContent>
     </Card>
   );
