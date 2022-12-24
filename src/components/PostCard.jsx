@@ -69,7 +69,7 @@ export default function PostCard({ post, isPrivate }) {
           <CardContent>
             <Typography variant="body2" color="text.secondary">
               "{capitalizeString(post.caption)}" posted by{" "}
-              <Link component={RouterLink} to={userUrl} variant="body2">
+              <Link component={RouterLink} to={`/${userUrl}`} variant="body2">
                 {capitalizeString(post.author)}
               </Link>{" "}
               <ReactTimeAgo date={Date.parse(post.created_on)} />
