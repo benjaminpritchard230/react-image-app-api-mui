@@ -69,15 +69,23 @@ export default function PrivateUserCard({}) {
               divider={<Divider orientation="vertical" flexItem />}
               mt={2}
             >
-              <Avatar
-                src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                alt="user-avatar"
-                sx={{ width: 100, height: 100 }}
-              />
-              <EditButton
-                handleEditClick={handleEditUserAvatarClick}
-                text={"Edit avatar"}
-              />
+              <Stack
+                direction={"column"}
+                alignItems="center"
+                justifyContent="center"
+                spacing={1}
+                mt={2}
+              >
+                <Avatar
+                  src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+                  alt="user-avatar"
+                  sx={{ width: 100, height: 100 }}
+                />
+                <EditButton
+                  handleEditClick={handleEditUserAvatarClick}
+                  text={"Edit avatar"}
+                />
+              </Stack>
 
               <Typography variant="h4" component="div">
                 {!isLoading
@@ -93,10 +101,7 @@ export default function PrivateUserCard({}) {
                 Joined{" "}
                 {<ReactTimeAgo date={Date.parse(userInfoData.date_joined)} />}
               </Typography>
-              <Typography variant="h5" component="div">
-                Last seen{" "}
-                {<ReactTimeAgo date={Date.parse(userInfoData.last_login)} />}
-              </Typography>
+
               <Typography variant="h5" component="div">
                 About:{" "}
                 {!isLoading && userInfoData.about_me
