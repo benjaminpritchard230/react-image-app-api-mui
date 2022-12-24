@@ -1,4 +1,3 @@
-import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
@@ -8,7 +7,7 @@ import { useDeleteMutation } from "../features/api/apiSlice";
 import { useDispatch } from "react-redux";
 const DeletePostButton = ({ post }) => {
   const dispatch = useDispatch();
-  const [deletePost, { isLoading }] = useDeleteMutation();
+  const [deletePost] = useDeleteMutation();
   const handleDeleteClick = async () => {
     try {
       await deletePost(post.id).unwrap();

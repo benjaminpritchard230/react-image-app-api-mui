@@ -1,11 +1,8 @@
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setSnackBar } from "../features/snack/snackSlice";
 import IconButton from "@mui/material/IconButton";
@@ -19,7 +16,7 @@ export default function EditUserAvatarDialog({
 }) {
   const dispatch = useDispatch();
 
-  const [editUserProfile, { isLoading }] = useEditUserProfileMutation();
+  const [editUserProfile] = useEditUserProfileMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -1,6 +1,5 @@
 import { Divider, Avatar, Grid, Paper } from "@mui/material";
 import CommentLikeButton from "./CommentLikeButton";
-import TimeAgo from "javascript-time-ago";
 import ReactTimeAgo from "react-time-ago";
 
 const imgLink =

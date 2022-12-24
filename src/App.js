@@ -4,7 +4,6 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
-import ButtonAppBar from "./components/ButtonAppBar";
 import Login from "./components/Login";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Register from "./components/Register";
@@ -15,13 +14,10 @@ import FloatingActionButtons from "./components/FloatingActionButtons";
 import NewPostDialog from "./components/NewPostDialog";
 import PaginationButtons from "./components/PaginationButtons";
 import UserPosts from "./components/UserPosts";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import SimpleSnackbar from "./components/SimpleSnackbar";
-import { setSnackBar } from "./features/snack/snackSlice";
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import PrivateUserCard from "./components/PrivateUserCard";
-// import { useSelector } from "react-redux";
-// import { UrlContext } from "./context/UrlContext";
 
 function App() {
   const darkTheme = createTheme({
@@ -48,7 +44,6 @@ function App() {
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <CssBaseline />
       <Router>
-        {/* <ButtonAppBar /> */}
         <ResponsiveAppBar />
         <Box sx={{ flexGrow: 1, minWidth: 1 }} key="1">
           <Grid container spacing={0}>

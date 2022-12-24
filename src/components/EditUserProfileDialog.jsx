@@ -12,7 +12,6 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { useEditUserProfileMutation } from "../features/api/apiSlice";
 
-import MyDropzone from "./MyDropzone";
 export default function EditUserProfileDialog({
   editUserProfileDialog,
   setEditUserProfileDialog,
@@ -22,7 +21,7 @@ export default function EditUserProfileDialog({
   const [location, setLocation] = useState("");
   const [aboutMe, setAboutMe] = useState("");
 
-  const [editUserProfile, { isLoading }] = useEditUserProfileMutation();
+  const [editUserProfile] = useEditUserProfileMutation();
 
   const handleEditClick = async () => {
     setEditUserProfileDialog(false);

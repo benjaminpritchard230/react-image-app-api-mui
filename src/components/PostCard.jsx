@@ -1,4 +1,3 @@
-import * as React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -8,9 +7,9 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { motion } from "framer-motion";
 import Link from "@mui/material/Link";
-import { BrowserRouter as Router, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import LikeButton from "./LikeButton";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import PostCommentsToggle from "./PostCommentsToggle";
 import { useState } from "react";
 import CommentsDialog from "./CommentsDialog";
@@ -22,12 +21,10 @@ export default function PostCard({ post, isPrivate }) {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
-    // padding: theme.spacing(1),
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
 
-  const dispatch = useDispatch();
   const [commentsDialog, setCommentsDialog] = useState(false);
   const auth = useSelector((state) => state.auth);
   const token = auth.token;

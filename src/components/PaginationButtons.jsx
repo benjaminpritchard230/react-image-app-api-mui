@@ -10,12 +10,7 @@ export default function PaginationButtons({ page, setPage }) {
     bottom: 35,
     position: "fixed",
   };
-  const {
-    data: publicPostsData,
-    error,
-    isError,
-    isLoading,
-  } = useGetPublicPostsQuery(page);
+  const { data: publicPostsData, isLoading } = useGetPublicPostsQuery(page);
   const handlePageChange = (event, value) => {
     setPage(value);
     console.log(value);

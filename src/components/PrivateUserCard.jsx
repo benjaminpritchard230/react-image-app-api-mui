@@ -1,8 +1,6 @@
-import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { useParams } from "react-router-dom";
 import { useGetUserInfoQuery } from "../features/api/apiSlice";
 import { Stack } from "@mui/system";
 import { Avatar } from "@mui/material";
@@ -13,7 +11,7 @@ import EditButton from "./EditButton";
 import EditUserProfileDialog from "./EditUserProfileDialog";
 import EditUserAvatarDialog from "./EditUserAvatarDialog";
 import { useState } from "react";
-export default function PrivateUserCard({}) {
+export default function PrivateUserCard() {
   const [editUserProfileDialog, setEditUserProfileDialog] = useState(false);
   const [editUserAvatarDialog, setEditUserAvatarDialog] = useState(false);
 
@@ -27,12 +25,7 @@ export default function PrivateUserCard({}) {
 
   const auth = useSelector((state) => state.auth);
 
-  const {
-    data: userInfoData,
-    error,
-    isError,
-    isLoading,
-  } = useGetUserInfoQuery(auth.id);
+  const { data: userInfoData, isLoading } = useGetUserInfoQuery(auth.id);
   console.log(userInfoData);
   const capitalizeString = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
