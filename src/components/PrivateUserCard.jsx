@@ -11,12 +11,20 @@ import ReactTimeAgo from "react-time-ago";
 import { useSelector } from "react-redux";
 import EditButton from "./EditButton";
 import EditUserProfileDialog from "./EditUserProfileDialog";
+import EditUserAvatarDialog from "./EditUserAvatarDialog";
 import { useState } from "react";
 export default function PrivateUserCard({}) {
   const [editUserProfileDialog, setEditUserProfileDialog] = useState(false);
-  const handleEditClick = () => {
+  const [editUserAvatarDialog, setEditUserAvatarDialog] = useState(false);
+
+  const handleEditUserProfileClick = () => {
     setEditUserProfileDialog(!editUserProfileDialog);
   };
+
+  const handleEditUserAvatarClick = () => {
+    setEditUserAvatarDialog(!editUserAvatarDialog);
+  };
+
   const auth = useSelector((state) => state.auth);
 
   const {
@@ -47,7 +55,7 @@ export default function PrivateUserCard({}) {
             <Typography variant="h4" component="div">
               Your profile
             </Typography>
-            <EditButton handleEditClick={handleEditClick} />
+            <EditButton handleEditClick={handleEditUserProfileClick} />
           </Stack>{" "}
           {!isLoading ? (
             <Stack
@@ -63,6 +71,8 @@ export default function PrivateUserCard({}) {
                 alt="user-avatar"
                 sx={{ width: 100, height: 100 }}
               />
+              <EditButton handleEditClick={handleEditUserAvatarClick} />
+
               <Typography variant="h4" component="div">
                 {!isLoading
                   ? capitalizeString(userInfoData.username)
@@ -94,7 +104,10 @@ export default function PrivateUserCard({}) {
       <EditUserProfileDialog
         editUserProfileDialog={editUserProfileDialog}
         setEditUserProfileDialog={setEditUserProfileDialog}
-        userInfoData={userInfoData}
+      />
+      <EditUserAvatarDialog
+        editUserAvatarDialog={editUserAvatarDialog}
+        setEditUserAvatarDialog={setEditUserAvatarDialog}
       />
     </>
   );

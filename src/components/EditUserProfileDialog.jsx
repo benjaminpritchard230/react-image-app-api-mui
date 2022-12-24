@@ -119,25 +119,6 @@ export default function EditUserProfileDialog({
               setAboutMe(e.target.value);
             }}
           />
-
-          <MyDropzone
-            inputProps={{
-              id: "image_url",
-              label: "image",
-              name: "image_url",
-            }}
-            accept={{
-              "image/png": [".png", ".jpeg", ".jpg", ".webp"],
-            }}
-          >
-            {({ getRootProps, getInputProps }) => (
-              <section>
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                </div>
-              </section>
-            )}
-          </MyDropzone>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => handleEditClick()}>Edit profile</Button>
