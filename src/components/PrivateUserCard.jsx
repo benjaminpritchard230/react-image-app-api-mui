@@ -55,7 +55,10 @@ export default function PrivateUserCard({}) {
             <Typography variant="h4" component="div">
               Your profile
             </Typography>
-            <EditButton handleEditClick={handleEditUserProfileClick} />
+            <EditButton
+              handleEditClick={handleEditUserProfileClick}
+              text={"Edit profile"}
+            />
           </Stack>{" "}
           {!isLoading ? (
             <Stack
@@ -71,7 +74,10 @@ export default function PrivateUserCard({}) {
                 alt="user-avatar"
                 sx={{ width: 100, height: 100 }}
               />
-              <EditButton handleEditClick={handleEditUserAvatarClick} />
+              <EditButton
+                handleEditClick={handleEditUserAvatarClick}
+                text={"Edit avatar"}
+              />
 
               <Typography variant="h4" component="div">
                 {!isLoading

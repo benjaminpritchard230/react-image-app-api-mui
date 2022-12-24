@@ -6,14 +6,14 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
 import { useLikeMutation } from "../features/api/apiSlice";
 import EditIcon from "@mui/icons-material/Edit";
-export default function EditButton({ handleEditClick }) {
+export default function EditButton({ handleEditClick, text }) {
   const auth = useSelector((state) => state.auth);
 
   return (
     <Stack direction="row" spacing={1}>
       <Chip
         icon={<EditIcon />}
-        label={"Edit"}
+        label={text}
         variant="outlined"
         onClick={() => {
           handleEditClick();
