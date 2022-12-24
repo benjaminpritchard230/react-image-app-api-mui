@@ -81,7 +81,7 @@ export const postsApi = createApi({
     editUserProfile: builder.mutation({
       query: (data) => ({
         url: "user/",
-        method: "PUT",
+        method: "PATCH",
         body: data,
       }),
       invalidatesTags: ["User"],
