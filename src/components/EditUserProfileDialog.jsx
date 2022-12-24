@@ -1,4 +1,3 @@
-import * as React from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -6,35 +5,34 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Snackbar } from "@mui/material";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useNewPostMutation } from "../features/api/apiSlice";
+import { useDispatch } from "react-redux";
 import { setSnackBar } from "../features/snack/snackSlice";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { useEditUserProfileMutation } from "../features/api/apiSlice";
-import { pickBy } from "lodash";
 
 import MyDropzone from "./MyDropzone";
 export default function EditUserProfileDialog({
   editUserProfileDialog,
   setEditUserProfileDialog,
-  userInfoData,
 }) {
-  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  const token = auth.token;
+  const [location, setLocation] = useState("");
+  const [aboutMe, setAboutMe] = useState("");
 
-  const [open, setOpen] = useState(false);
-  const [image, setImage] = useState();
   const [editUserProfile, { isLoading }] = useEditUserProfileMutation();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+
+  const handleEditClick = async () => {
     setEditUserProfileDialog(false);
-    const data = new FormData(e.target);
-    console.log(e);
+    const data = new FormData();
+    if (location.length > 0) {
+      data.append("location", location);
+    }
+    if (aboutMe.length > 0) {
+      data.append("about_me", aboutMe);
+    }
     try {
       await editUserProfile(data).unwrap();
       dispatch(
@@ -54,9 +52,13 @@ export default function EditUserProfileDialog({
         })
       );
     }
+    setLocation("");
+    setAboutMe("");
   };
   const handleClose = () => {
     setEditUserProfileDialog(false);
+    setLocation("");
+    setAboutMe("");
   };
   return (
     <>
@@ -73,82 +75,81 @@ export default function EditUserProfileDialog({
         fullWidth
         maxWidth="md"
       >
-        <form onSubmit={handleSubmit}>
-          <DialogTitle>Edit your user profile</DialogTitle>
-          <IconButton
-            aria-label="close"
-            onClick={handleClose}
-            sx={{
-              position: "absolute",
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
+        <DialogTitle>Edit your user profile</DialogTitle>
+        <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          {" "}
+          <CloseIcon />
+        </IconButton>
+        <DialogContent>
+          <DialogContentText></DialogContentText>
+          <TextField
+            name="location"
+            autoFocus
+            margin="dense"
+            id="location"
+            label="Location"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={location}
+            onChange={(e) => {
+              setLocation(e.target.value);
+            }}
+          />
+          <TextField
+            name="about_me"
+            autoFocus
+            margin="dense"
+            id="about_me"
+            label="About me"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={aboutMe}
+            onChange={(e) => {
+              setAboutMe(e.target.value);
+            }}
+          />
+
+          <MyDropzone
+            inputProps={{
+              id: "image_url",
+              label: "image",
+              name: "image_url",
+            }}
+            accept={{
+              "image/png": [".png", ".jpeg", ".jpg", ".webp"],
             }}
           >
-            {" "}
-            <CloseIcon />
-          </IconButton>
-          <DialogContent>
-            <DialogContentText></DialogContentText>
-            <TextField
-              name="location"
-              autoFocus
-              margin="dense"
-              id="location"
-              label="Location"
-              type="text"
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              name="about_me"
-              autoFocus
-              margin="dense"
-              id="about_me"
-              label="About me"
-              type="text"
-              fullWidth
-              variant="standard"
-            />
-
-            <MyDropzone
-              inputProps={{
-                id: "image_url",
-                label: "image",
-                name: "image_url",
-              }}
-              accept={{
-                "image/png": [".png", ".jpeg", ".jpg", ".webp"],
-              }}
-            >
-              {({ getRootProps, getInputProps }) => (
-                <section>
-                  <div {...getRootProps()}>
-                    <input {...getInputProps()} />
-                  </div>
-                </section>
-              )}
-            </MyDropzone>
-          </DialogContent>
-          <DialogActions>
-            <Button type="submit">Edit profile</Button>
-            <Button
-              onClick={() => {
-                setEditUserProfileDialog(false);
-              }}
-            >
-              Cancel
-            </Button>
-          </DialogActions>
-        </form>
+            {({ getRootProps, getInputProps }) => (
+              <section>
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                </div>
+              </section>
+            )}
+          </MyDropzone>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => handleEditClick()}>Edit profile</Button>
+          <Button
+            onClick={() => {
+              setEditUserProfileDialog(false);
+            }}
+          >
+            Cancel
+          </Button>
+        </DialogActions>
       </Dialog>
-      <Snackbar
-        open={open}
-        autoHideDuration={2000}
-        onClose={handleClose}
-        message="Task created"
-        sx={{ bottom: { xs: 90, sm: 0 } }}
-      />
     </>
   );
 }
