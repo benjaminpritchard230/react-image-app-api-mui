@@ -28,6 +28,7 @@ export const postsApi = createApi({
     }),
     getUserInfo: builder.query({
       query: (id) => `user/${id}/`,
+      providesTags: ["User"],
     }),
     getPostComments: builder.query({
       query: (id) => `posts/${id}/comments/`,
@@ -77,6 +78,14 @@ export const postsApi = createApi({
       }),
       invalidatesTags: ["Posts"],
     }),
+    editUserProfile: builder.mutation({
+      query: (data) => ({
+        url: "user/",
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["User"],
+    }),
     addComment: builder.mutation({
       query: (data) => ({
         url: `posts/${data.id}/comments/add/`,
@@ -107,6 +116,7 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useNewPostMutation,
+  useEditUserProfileMutation,
   useAddCommentMutation,
   useLikeCommentMutation,
 } = postsApi;

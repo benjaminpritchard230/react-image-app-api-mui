@@ -19,6 +19,7 @@ import { useSelector, useDispatch } from "react-redux";
 import SimpleSnackbar from "./components/SimpleSnackbar";
 import { setSnackBar } from "./features/snack/snackSlice";
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
+import PrivateUserCard from "./components/PrivateUserCard";
 // import { useSelector } from "react-redux";
 // import { UrlContext } from "./context/UrlContext";
 
@@ -64,7 +65,15 @@ function App() {
                   </>
                 }
               />
-              <Route path={"/private"} element={<PrivatePosts />} />
+              <Route
+                path={"/private"}
+                element={
+                  <>
+                    <PrivateUserCard />
+                    <PrivatePosts />
+                  </>
+                }
+              />
               <Route path={"/login"} element={<Login />} />
               <Route path={"/register"} element={<Register />} />
               <Route
