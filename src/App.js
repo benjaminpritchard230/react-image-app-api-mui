@@ -37,10 +37,12 @@ function App() {
       },
     },
   });
-  const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme.theme);
   const [newPostDialog, setNewPostDialog] = useState(false);
   const [page, setPage] = useState(1);
+
+  const auth = useSelector((state) => state.auth);
+  const token = auth.token;
 
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
@@ -68,10 +70,14 @@ function App() {
               <Route
                 path={"/private"}
                 element={
-                  <>
-                    <PrivateUserCard />
-                    <PrivatePosts />
-                  </>
+                  token.length > 0 ? (
+                    <>
+                      <PrivateUserCard />
+                      <PrivatePosts />
+                    </>
+                  ) : (
+                    "Login to view user profile."
+                  )
                 }
               />
               <Route path={"/login"} element={<Login />} />
