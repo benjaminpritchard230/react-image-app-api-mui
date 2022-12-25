@@ -31,7 +31,7 @@ export const postsApi = createApi({
       providesTags: ["User"],
     }),
     getCurrentUserInfo: builder.query({
-      query: (id) => `user/`,
+      query: () => `user/`,
       providesTags: ["User"],
     }),
     getPostComments: builder.query({

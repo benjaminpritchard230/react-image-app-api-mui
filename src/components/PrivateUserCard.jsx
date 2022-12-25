@@ -25,7 +25,7 @@ export default function PrivateUserCard() {
 
   const auth = useSelector((state) => state.auth);
 
-  const { data: userInfoData, isLoading } = useGetCurrentUserInfoQuery(auth.id);
+  const { data: userInfoData, isLoading } = useGetCurrentUserInfoQuery();
   console.log(userInfoData);
   const capitalizeString = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();

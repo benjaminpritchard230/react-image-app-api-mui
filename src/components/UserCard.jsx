@@ -11,8 +11,8 @@ import { Stack } from "@mui/system";
 import { Avatar } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import ReactTimeAgo from "react-time-ago";
-import Button from "@mui/material/Button";
 import { useSelector } from "react-redux";
+import SubscribeButton from "./SubscribeButton";
 
 export default function UserCard({}) {
   const { id } = useParams();
@@ -34,11 +34,6 @@ export default function UserCard({}) {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
 
-  const [followUser] = useFollowUserMutation();
-
-  const handleSubscribeClick = () => {
-    followUser(id);
-  };
   return (
     <Card
       sx={{
@@ -63,14 +58,7 @@ export default function UserCard({}) {
               : "Loading..."}
           </Typography>
 
-          <Button
-            variant="contained"
-            onClick={() => {
-              handleSubscribeClick();
-            }}
-          >
-            Subscribe
-          </Button>
+          {token.length > 0 ? <SubscribeButton id={id} /> : null}
         </Stack>{" "}
         {!isLoading ? (
           <Stack
