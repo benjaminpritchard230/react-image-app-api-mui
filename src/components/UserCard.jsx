@@ -78,12 +78,8 @@ export default function UserCard({}) {
               Joined{" "}
               {<ReactTimeAgo date={Date.parse(userInfoData.date_joined)} />}
             </Typography>
+
             <Typography variant="h5" component="div">
-              Last seen{" "}
-              {<ReactTimeAgo date={Date.parse(userInfoData.last_login)} />}
-            </Typography>
-            <Typography variant="h5" component="div">
-              About:{" "}
               {!isLoading && userInfoData.about_me
                 ? capitalizeString(userInfoData.about_me)
                 : null}
