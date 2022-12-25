@@ -30,6 +30,10 @@ export const postsApi = createApi({
       query: (id) => `user/${id}/`,
       providesTags: ["User"],
     }),
+    getCurrentUserInfo: builder.query({
+      query: (id) => `user/`,
+      providesTags: ["User"],
+    }),
     getPostComments: builder.query({
       query: (id) => `posts/${id}/comments/`,
       providesTags: ["Comments"],
@@ -101,6 +105,13 @@ export const postsApi = createApi({
       }),
       invalidatesTags: ["Comments"],
     }),
+    followUser: builder.mutation({
+      query: (id) => ({
+        url: `user/${id}/follow/`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -109,6 +120,7 @@ export const {
   useGetPrivatePostsQuery,
   useGetUserPostsQuery,
   useGetUserInfoQuery,
+  useGetCurrentUserInfoQuery,
   useGetPostCommentsQuery,
   useLikeMutation,
   useMakePrivateMutation,
@@ -119,4 +131,5 @@ export const {
   useEditUserProfileMutation,
   useAddCommentMutation,
   useLikeCommentMutation,
+  useFollowUserMutation,
 } = postsApi;

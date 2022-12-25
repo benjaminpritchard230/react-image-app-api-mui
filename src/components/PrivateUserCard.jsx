@@ -1,7 +1,7 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { useGetUserInfoQuery } from "../features/api/apiSlice";
+import { useGetCurrentUserInfoQuery } from "../features/api/apiSlice";
 import { Stack } from "@mui/system";
 import { Avatar } from "@mui/material";
 import Divider from "@mui/material/Divider";
@@ -25,7 +25,7 @@ export default function PrivateUserCard() {
 
   const auth = useSelector((state) => state.auth);
 
-  const { data: userInfoData, isLoading } = useGetUserInfoQuery(auth.id);
+  const { data: userInfoData, isLoading } = useGetCurrentUserInfoQuery(auth.id);
   console.log(userInfoData);
   const capitalizeString = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();

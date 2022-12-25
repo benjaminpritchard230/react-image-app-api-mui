@@ -3,23 +3,41 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useParams } from "react-router-dom";
-import { useGetUserInfoQuery } from "../features/api/apiSlice";
+import {
+  useFollowUserMutation,
+  useGetUserInfoQuery,
+} from "../features/api/apiSlice";
 import { Stack } from "@mui/system";
 import { Avatar } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import ReactTimeAgo from "react-time-ago";
+import Button from "@mui/material/Button";
+import { useSelector } from "react-redux";
 
 export default function UserCard({}) {
   const { id } = useParams();
+  const auth = useSelector((state) => state.auth);
+  const token = auth.token;
+
   const {
     data: userInfoData,
     error,
     isError,
     isLoading,
   } = useGetUserInfoQuery(id);
+
+  if (token.length > 0) {
+  }
+
   console.log(userInfoData);
   const capitalizeString = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+
+  const [followUser] = useFollowUserMutation();
+
+  const handleSubscribeClick = () => {
+    followUser(id);
   };
   return (
     <Card
@@ -44,6 +62,15 @@ export default function UserCard({}) {
               ? capitalizeString(userInfoData.username)
               : "Loading..."}
           </Typography>
+
+          <Button
+            variant="contained"
+            onClick={() => {
+              handleSubscribeClick();
+            }}
+          >
+            Subscribe
+          </Button>
         </Stack>{" "}
         {!isLoading ? (
           <Stack
