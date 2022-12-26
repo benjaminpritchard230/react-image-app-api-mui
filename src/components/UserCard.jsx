@@ -27,14 +27,14 @@ export default function UserCard({}) {
   if (token.length > 0) {
   }
 
-  // console.log(userInfoData.followed_by, "follows vbt");
+  // console.log(userInfoData.followers_names, "follows vbt");
   const capitalizeString = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
 
-  const followed_by =
-    !isLoading && userInfoData.followed_by.length > 0
-      ? `Followed by ${userInfoData.followed_by.join(", ").toString()}`
+  const followers_names =
+    !isLoading && userInfoData.followers_names.length > 0
+      ? `Followed by ${userInfoData.followers_names.join(", ").toString()}`
       : "No followers yet";
 
   const following_names =
@@ -92,7 +92,7 @@ export default function UserCard({}) {
                 ? capitalizeString(userInfoData.about_me)
                 : null}
             </Typography>
-            <Tooltip title={followed_by} placement="top">
+            <Tooltip title={followers_names} placement="top">
               <Typography variant="h5" component="div">
                 Followers: {userInfoData.followers.length}
               </Typography>
