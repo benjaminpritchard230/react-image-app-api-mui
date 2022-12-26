@@ -3,16 +3,13 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useParams } from "react-router-dom";
-import {
-  useFollowUserMutation,
-  useGetUserInfoQuery,
-} from "../features/api/apiSlice";
+import { useGetUserInfoQuery } from "../features/api/apiSlice";
 import { Stack } from "@mui/system";
 import { Avatar } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import ReactTimeAgo from "react-time-ago";
 import { useSelector } from "react-redux";
-import SubscribeButton from "./SubscribeButton";
+import FollowButton from "./FollowButton";
 
 export default function UserCard({}) {
   const { id } = useParams();
@@ -41,25 +38,25 @@ export default function UserCard({}) {
       }}
     >
       <CardContent>
-        <Stack
-          direction={{ xs: "column", md: "row" }}
-          alignItems="center"
-          justifyContent="center"
-          spacing={2}
-        >
-          <Avatar
-            src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-            alt="user-avatar"
-            sx={{ width: 100, height: 100 }}
-          />
-          <Typography variant="h4" component="div">
-            {!isLoading
-              ? capitalizeString(userInfoData.username)
-              : "Loading..."}
-          </Typography>
+        {!isLoading ? (
+          <Stack
+            direction={{ xs: "column", md: "row" }}
+            alignItems="center"
+            justifyContent="center"
+            spacing={2}
+          >
+            <Avatar
+              src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+              alt="user-avatar"
+              sx={{ width: 100, height: 100 }}
+            />
+            <Typography variant="h4" component="div">
+              {capitalizeString(userInfoData.username)}
+            </Typography>
+            {token.length > 0 ? <FollowButton id={id} /> : null}
+          </Stack>
+        ) : null}
 
-          {token.length > 0 ? <SubscribeButton id={id} /> : null}
-        </Stack>{" "}
         {!isLoading ? (
           <Stack
             direction={{ xs: "column", xl: "row" }}
@@ -70,7 +67,7 @@ export default function UserCard({}) {
             mt={2}
           >
             <Typography variant="h5" component="div">
-              {!isLoading && userInfoData.location
+              {userInfoData.location
                 ? capitalizeString(userInfoData.location)
                 : null}
             </Typography>
@@ -80,9 +77,12 @@ export default function UserCard({}) {
             </Typography>
 
             <Typography variant="h5" component="div">
-              {!isLoading && userInfoData.about_me
+              {userInfoData.about_me
                 ? capitalizeString(userInfoData.about_me)
                 : null}
+            </Typography>
+            <Typography variant="h5" component="div">
+              Followers: {userInfoData.followers.length}
             </Typography>
           </Stack>
         ) : null}

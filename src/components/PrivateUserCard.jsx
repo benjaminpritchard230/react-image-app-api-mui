@@ -101,6 +101,12 @@ export default function PrivateUserCard() {
                   ? capitalizeString(userInfoData.about_me)
                   : null}
               </Typography>
+              <Typography variant="h5" component="div">
+                Followers:{" "}
+                {!isLoading && userInfoData.about_me
+                  ? userInfoData.followers.length
+                  : null}
+              </Typography>
             </Stack>
           ) : null}
         </CardContent>

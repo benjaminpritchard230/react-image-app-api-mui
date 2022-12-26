@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import { useFollowUserMutation } from "../features/api/apiSlice";
 import { Tooltip } from "@mui/material";
 
-const SubscribeButton = ({ id }) => {
+const FollowButton = ({ id }) => {
   const {
     data: currentUserInfoData,
     error,
@@ -38,11 +38,11 @@ const SubscribeButton = ({ id }) => {
         }}
       >
         {!isLoading && currentUserInfoData.following.includes(parseInt(id))
-          ? "Subscribed"
-          : "Subscribe"}
+          ? "Unfollow"
+          : "Follow"}
       </Button>
     </Tooltip>
   );
 };
 
-export default SubscribeButton;
+export default FollowButton;
