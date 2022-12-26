@@ -84,6 +84,9 @@ export default function UserCard({}) {
             <Typography variant="h5" component="div">
               Followers: {userInfoData.followers.length}
             </Typography>
+            <Typography variant="h5" component="div">
+              Following: {userInfoData.following.length}
+            </Typography>
           </Stack>
         ) : null}
       </CardContent>

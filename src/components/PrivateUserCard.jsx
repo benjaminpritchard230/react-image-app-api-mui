@@ -102,10 +102,10 @@ export default function PrivateUserCard() {
                   : null}
               </Typography>
               <Typography variant="h5" component="div">
-                Followers:{" "}
-                {!isLoading && userInfoData.about_me
-                  ? userInfoData.followers.length
-                  : null}
+                Followers: {userInfoData.followers.length}
+              </Typography>
+              <Typography variant="h5" component="div">
+                Following: {userInfoData.following.length}
               </Typography>
             </Stack>
           ) : null}
