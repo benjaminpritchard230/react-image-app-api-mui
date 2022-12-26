@@ -10,6 +10,7 @@ import Divider from "@mui/material/Divider";
 import ReactTimeAgo from "react-time-ago";
 import { useSelector } from "react-redux";
 import FollowButton from "./FollowButton";
+import { Tooltip } from "@mui/material";
 
 export default function UserCard({}) {
   const { id } = useParams();
@@ -26,10 +27,20 @@ export default function UserCard({}) {
   if (token.length > 0) {
   }
 
-  console.log(userInfoData);
+  // console.log(userInfoData.followed_by, "follows vbt");
   const capitalizeString = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
+
+  const followed_by =
+    !isLoading && userInfoData.followed_by.length > 0
+      ? `Followed by ${userInfoData.followed_by.join(", ").toString()}`
+      : "No followers yet";
+
+  const following_names =
+    !isLoading && userInfoData.following_names.length > 0
+      ? `Following ${userInfoData.following_names.join(", ").toString()}`
+      : "Not following anyone yet";
 
   return (
     <Card
@@ -81,12 +92,16 @@ export default function UserCard({}) {
                 ? capitalizeString(userInfoData.about_me)
                 : null}
             </Typography>
-            <Typography variant="h5" component="div">
-              Followers: {userInfoData.followers.length}
-            </Typography>
-            <Typography variant="h5" component="div">
-              Following: {userInfoData.following.length}
-            </Typography>
+            <Tooltip title={followed_by} placement="top">
+              <Typography variant="h5" component="div">
+                Followers: {userInfoData.followers.length}
+              </Typography>
+            </Tooltip>
+            <Tooltip title={following_names} placement="top">
+              <Typography variant="h5" component="div">
+                Following: {userInfoData.following.length}
+              </Typography>
+            </Tooltip>
           </Stack>
         ) : null}
       </CardContent>
