@@ -3,7 +3,8 @@ import CommentLikeButton from "./CommentLikeButton";
 import ReactTimeAgo from "react-time-ago";
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@mui/material/Link";
-
+import DeleteCommentButton from "./DeleteCommentButton";
+import { Stack } from "@mui/system";
 const imgLink =
   "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260";
 
@@ -26,7 +27,10 @@ export default function CommentDisplay({ comment }) {
           <p style={{ textAlign: "left", color: "gray" }}>
             <ReactTimeAgo date={Date.parse(comment.created_on)} />
           </p>
-          <CommentLikeButton comment={comment} key={comment.id} />
+          <Stack direction="row" spacing={1}>
+            <CommentLikeButton comment={comment} key={comment.id} />
+            {<DeleteCommentButton comment={comment} />}
+          </Stack>
         </Grid>
       </Grid>
       <Divider variant="fullWidth" style={{ margin: "30px 0" }} />

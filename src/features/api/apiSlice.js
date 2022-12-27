@@ -15,11 +15,11 @@ export const postsApi = createApi({
   tagTypes: ["Posts", "Auth"],
   endpoints: (builder) => ({
     getPublicPosts: builder.query({
-      query: (page) => `all_posts?page=${page}`,
+      query: (page) => `posts/all?page=${page}`,
       providesTags: ["Posts"],
     }),
     getPrivatePosts: builder.query({
-      query: () => `my_posts/`,
+      query: () => `posts/my/`,
       providesTags: ["Posts"],
     }),
     getUserPosts: builder.query({
@@ -76,7 +76,7 @@ export const postsApi = createApi({
     }),
     newPost: builder.mutation({
       query: (data) => ({
-        url: "my_posts/",
+        url: "posts/my/",
         method: "POST",
         body: data,
       }),
@@ -95,6 +95,13 @@ export const postsApi = createApi({
         url: `posts/${data.id}/comments/add/`,
         method: "POST",
         body: data.body,
+      }),
+      invalidatesTags: ["Posts", "Comments"],
+    }),
+    deleteComment: builder.mutation({
+      query: (id) => ({
+        url: `comments/${id}/`,
+        method: "Delete",
       }),
       invalidatesTags: ["Posts", "Comments"],
     }),
@@ -130,6 +137,7 @@ export const {
   useNewPostMutation,
   useEditUserProfileMutation,
   useAddCommentMutation,
+  useDeleteCommentMutation,
   useLikeCommentMutation,
   useFollowUserMutation,
 } = postsApi;

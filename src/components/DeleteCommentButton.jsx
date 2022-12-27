@@ -5,16 +5,17 @@ import Tooltip from "@mui/material/Tooltip";
 import { setSnackBar } from "../features/snack/snackSlice";
 import { useDeleteMutation } from "../features/api/apiSlice";
 import { useDispatch } from "react-redux";
+import { useDeleteCommentMutation } from "../features/api/apiSlice";
 import { Chip } from "@mui/material";
-const DeletePostButton = ({ post }) => {
+const DeleteCommentButton = ({ comment }) => {
   const dispatch = useDispatch();
-  const [deletePost] = useDeleteMutation();
+  const [deleteComment] = useDeleteCommentMutation();
   const handleDeleteClick = async () => {
     try {
-      await deletePost(post.id).unwrap();
+      await deleteComment(comment.id).unwrap();
       dispatch(
         setSnackBar({
-          snackMessage: "Post deleted.",
+          snackMessage: "Comment deleted.",
           snackOpen: true,
         })
       );
@@ -22,7 +23,7 @@ const DeletePostButton = ({ post }) => {
       console.log(err);
       dispatch(
         setSnackBar({
-          snackMessage: "That post does not exist.",
+          snackMessage: "That comment does not exist.",
           snackOpen: true,
         })
       );
@@ -42,4 +43,4 @@ const DeletePostButton = ({ post }) => {
   );
 };
 
-export default DeletePostButton;
+export default DeleteCommentButton;
