@@ -23,7 +23,7 @@ export default function CommentLikeButton({ comment }) {
   };
   return (
     <Stack direction="row" spacing={1}>
-      <Tooltip title={liked_by} placement="right">
+      <Tooltip title={liked_by} placement="bottom">
         {token.length > 0 ? (
           <Chip
             icon={

@@ -30,7 +30,7 @@ const DeleteCommentButton = ({ comment }) => {
     }
   };
   return (
-    <Tooltip title="Delete" placement="top">
+    <Tooltip title="Delete" placement="bottom">
       <Chip
         icon={<DeleteIcon />}
         variant="outlined"
