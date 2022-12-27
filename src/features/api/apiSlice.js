@@ -18,6 +18,10 @@ export const postsApi = createApi({
       query: (page) => `posts/all?page=${page}`,
       providesTags: ["Posts"],
     }),
+    getFollowingPosts: builder.query({
+      query: () => `posts/following/`,
+      providesTags: ["Posts"],
+    }),
     getPrivatePosts: builder.query({
       query: () => `posts/my/`,
       providesTags: ["Posts"],
@@ -124,6 +128,7 @@ export const postsApi = createApi({
 
 export const {
   useGetPublicPostsQuery,
+  useGetFollowingPostsQuery,
   useGetPrivatePostsQuery,
   useGetUserPostsQuery,
   useGetUserInfoQuery,

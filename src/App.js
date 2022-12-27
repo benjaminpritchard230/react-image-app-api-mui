@@ -18,6 +18,8 @@ import { useSelector } from "react-redux";
 import SimpleSnackbar from "./components/SimpleSnackbar";
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import PrivateUserCard from "./components/PrivateUserCard";
+import PublicPostsTopCard from "./components/PublicPostsTopCard";
+import FollowingPosts from "./components/FollowingPosts";
 
 function App() {
   const darkTheme = createTheme({
@@ -36,9 +38,27 @@ function App() {
   const theme = useSelector((state) => state.theme.theme);
   const [newPostDialog, setNewPostDialog] = useState(false);
   const [page, setPage] = useState(1);
+  const [followingPosts, setFollowingPosts] = useState(false);
 
   const auth = useSelector((state) => state.auth);
   const token = auth.token;
+
+  const displayPosts = () => {
+    if (!followingPosts) {
+      return (
+        <>
+          <PublicPosts
+            page={page}
+            followingPosts={followingPosts}
+            setFollowingPosts={setFollowingPosts}
+          />
+          <PaginationButtons page={page} setPage={setPage} position="static" />
+        </>
+      );
+    } else {
+      return <FollowingPosts />;
+    }
+  };
 
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
@@ -53,12 +73,13 @@ function App() {
                 path={"/"}
                 element={
                   <>
-                    <PublicPosts page={page} />
-                    <PaginationButtons
-                      page={page}
-                      setPage={setPage}
-                      position="static"
-                    />
+                    {token.length > 0 ? (
+                      <PublicPostsTopCard
+                        followingPosts={followingPosts}
+                        setFollowingPosts={setFollowingPosts}
+                      />
+                    ) : null}
+                    {displayPosts()}
                   </>
                 }
               />
