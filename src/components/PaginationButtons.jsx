@@ -16,7 +16,7 @@ export default function PaginationButtons({ page, setPage }) {
     console.log(value);
   };
 
-  const count = !isLoading ? Math.ceil(publicPostsData.count / 12) : 0;
+  const count = !isLoading ? Math.ceil(publicPostsData.count / 9) : 0;
 
   return (
     <Stack spacing={2} style={style}>
