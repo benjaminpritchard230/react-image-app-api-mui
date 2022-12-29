@@ -16,7 +16,14 @@ export default function PublicPostsBottomCard({ page, setPage }) {
         bottom: 0,
       }}
     >
-      <CardContent>
+      <CardContent
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "65px",
+        }}
+      >
         <Stack
           direction="column"
           sx={{ alignItems: "center", justifyContent: "center" }}

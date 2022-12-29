@@ -23,11 +23,16 @@ export default function PublicPostsTopCard({
       sx={{
         width: "100%",
         height: "60px",
-        alignItems: "center",
-        justifyContent: "end",
       }}
     >
-      <CardContent>
+      <CardContent
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "end",
+          height: "70px",
+        }}
+      >
         <Stack
           spacing={2}
           direction={{ xs: "column", md: "row" }}
