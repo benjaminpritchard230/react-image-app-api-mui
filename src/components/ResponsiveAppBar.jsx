@@ -54,9 +54,20 @@ export default function ResponsiveAppBar() {
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <BurstModeOutlinedIcon
-            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-          />
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            <BurstModeOutlinedIcon
+              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+            />
+          </IconButton>
+
           <Typography
             variant="h6"
             noWrap
@@ -72,6 +83,7 @@ export default function ResponsiveAppBar() {
               letterSpacing: ".4rem",
               color: "inherit",
               textDecoration: "none",
+              cursor: "pointer",
             }}
           >
             Image
