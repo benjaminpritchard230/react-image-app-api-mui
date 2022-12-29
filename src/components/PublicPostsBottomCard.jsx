@@ -11,7 +11,7 @@ export default function PublicPostsBottomCard({ page, setPage }) {
     <Card
       sx={{
         width: "100%",
-        height: "60px",
+        height: "50px",
         position: "sticky",
         bottom: 0,
       }}
@@ -21,7 +21,7 @@ export default function PublicPostsBottomCard({ page, setPage }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          height: "65px",
+          height: "56px",
         }}
       >
         <Stack
