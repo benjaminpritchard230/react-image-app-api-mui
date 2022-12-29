@@ -22,7 +22,7 @@ export default function PublicPostsTopCard({
     <Card
       sx={{
         width: "100%",
-        height: "60px",
+        height: "50px",
       }}
     >
       <CardContent
@@ -30,7 +30,7 @@ export default function PublicPostsTopCard({
           display: "flex",
           alignItems: "center",
           justifyContent: "end",
-          height: "70px",
+          height: "62px",
         }}
       >
         <Stack
