@@ -19,13 +19,11 @@ export default function PaginationButtons({ page, setPage }) {
   const count = !isLoading ? Math.ceil(publicPostsData.count / 9) : 0;
 
   return (
-    <Stack spacing={2} style={style}>
-      <Pagination
-        count={count}
-        page={page}
-        color="primary"
-        onChange={handlePageChange}
-      />
-    </Stack>
+    <Pagination
+      count={count}
+      page={page}
+      color="primary"
+      onChange={handlePageChange}
+    />
   );
 }

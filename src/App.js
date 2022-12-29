@@ -20,6 +20,7 @@ import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import PrivateUserCard from "./components/PrivateUserCard";
 import PublicPostsTopCard from "./components/PublicPostsTopCard";
 import FollowingPosts from "./components/FollowingPosts";
+import PublicPostsBottomCard from "./components/PublicPostsBottomCard";
 
 function App() {
   const darkTheme = createTheme({
@@ -52,7 +53,6 @@ function App() {
             followingPosts={followingPosts}
             setFollowingPosts={setFollowingPosts}
           />
-          <PaginationButtons page={page} setPage={setPage} position="static" />
         </>
       );
     } else {
@@ -77,9 +77,15 @@ function App() {
                       <PublicPostsTopCard
                         followingPosts={followingPosts}
                         setFollowingPosts={setFollowingPosts}
+                        page={page}
+                        setPage={setPage}
                       />
                     ) : null}
+
                     {displayPosts()}
+                    {!followingPosts ? (
+                      <PublicPostsBottomCard page={page} setPage={setPage} />
+                    ) : null}
                   </>
                 }
               />
