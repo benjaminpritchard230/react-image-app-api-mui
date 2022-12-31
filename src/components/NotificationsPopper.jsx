@@ -47,8 +47,7 @@ export default function NotificationsPopper({
                   variant="body2"
                   color="text.primary"
                 >
-                  {/* <ReactTimeAgo date={Date.parse(notification.timestamp)} /> */}
-                  {notification.recipient.id}
+                  <ReactTimeAgo date={Date.parse(notification.timestamp)} />
                 </Typography>
               </React.Fragment>
             }
@@ -60,7 +59,7 @@ export default function NotificationsPopper({
   };
 
   const displayNotifications = () => {
-    if (!isLoading) {
+    if (!isLoading && notificationsData.length > 0) {
       return notificationsData.map((notification) => (
         <NotificationDisplay
           notification={notification}
@@ -68,7 +67,7 @@ export default function NotificationsPopper({
         />
       ));
     } else {
-      return "Log in to view notifications.";
+      return "No notifications yet.";
     }
   };
 

@@ -2,7 +2,7 @@ import PostCard from "./PostCard";
 import { useParams } from "react-router-dom";
 import { useGetUserPostsQuery } from "../features/api/apiSlice";
 
-const UserPosts = ({}) => {
+const UserPosts = () => {
   const { id } = useParams();
   const {
     data: userPostsData,

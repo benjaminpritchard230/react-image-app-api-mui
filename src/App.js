@@ -21,6 +21,7 @@ import PrivateUserCard from "./components/PrivateUserCard";
 import PublicPostsTopCard from "./components/PublicPostsTopCard";
 import FollowingPosts from "./components/FollowingPosts";
 import PublicPostsBottomCard from "./components/PublicPostsBottomCard";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const darkTheme = createTheme({
@@ -44,6 +45,8 @@ function App() {
   const auth = useSelector((state) => state.auth);
   const token = auth.token;
 
+  const uuid = uuidv4();
+
   const displayPosts = () => {
     if (!followingPosts) {
       return (
@@ -52,7 +55,7 @@ function App() {
             page={page}
             followingPosts={followingPosts}
             setFollowingPosts={setFollowingPosts}
-            key={Math.random()}
+            key={uuid}
           />
         </>
       );
