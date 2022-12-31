@@ -87,9 +87,13 @@ export default function NotificationsPopper({
           horizontal: "left",
         }}
       >
-        <Box sx={{ border: 1, p: 1, bgcolor: "background.paper" }}>
+        <Box sx={{ border: 0, p: 1, bgcolor: "background.paper" }}>
           <List
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            sx={{
+              width: "100%",
+              maxHeight: "500px",
+              bgcolor: "background.paper",
+            }}
           >
             {displayNotifications()}
           </List>
