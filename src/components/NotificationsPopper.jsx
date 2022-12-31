@@ -29,32 +29,42 @@ export default function NotificationsPopper({
   } = useGetNotificationsQuery();
   console.log(notificationsData);
 
+  const NotificationDisplay = ({ notification }) => {
+    return (
+      <>
+        <ListItem alignItems="flex-start">
+          <ListItemText
+            primary={notification.verb}
+            secondary={
+              <React.Fragment>
+                <Typography
+                  sx={{ display: "inline" }}
+                  component="span"
+                  variant="body2"
+                  color="text.primary"
+                >
+                  {/* <ReactTimeAgo date={Date.parse(notification.timestamp)} /> */}
+                  {notification.recipient.id}
+                </Typography>
+              </React.Fragment>
+            }
+          />
+        </ListItem>
+        <Divider component="li" />
+      </>
+    );
+  };
+
   const displayNotifications = () => {
     if (!isLoading) {
       return notificationsData.map((notification) => (
-        <>
-          <ListItem alignItems="flex-start">
-            <ListItemText
-              primary={notification.verb}
-              secondary={
-                <React.Fragment>
-                  <Typography
-                    sx={{ display: "inline" }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    <ReactTimeAgo date={Date.parse(notification.timestamp)} />
-                  </Typography>
-                </React.Fragment>
-              }
-            />
-          </ListItem>
-          <Divider component="li" />
-        </>
+        <NotificationDisplay
+          notification={notification}
+          key={notification.id}
+        />
       ));
     } else {
-      return "Log in to view private posts.";
+      return "Log in to view notifications.";
     }
   };
 
