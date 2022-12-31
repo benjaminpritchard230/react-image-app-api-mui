@@ -24,6 +24,8 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useState } from "react";
 import NotificationsPopper from "./NotificationsPopper";
 import { useGetNotificationsQuery } from "../features/api/apiSlice";
+import { postsApi } from "../features/api/apiSlice";
+import { useGetPublicPostsQuery } from "../features/api/apiSlice";
 
 export default function ResponsiveAppBar() {
   const dispatch = useDispatch();
@@ -64,6 +66,9 @@ export default function ResponsiveAppBar() {
 
   const handleLogoutClick = () => {
     dispatch(setCredentials({ id: "", token: "" }));
+    dispatch(postsApi.util.resetApiState());
+    dispatch(postsApi.util.invalidateTags(["Posts"]));
+
     navigate("/");
   };
 

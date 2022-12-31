@@ -7,7 +7,7 @@ const PublicPosts = ({ page }) => {
     error,
     isError,
     isLoading,
-  } = useGetPublicPostsQuery(page);
+  } = useGetPublicPostsQuery(page, { refetchOnMountOrArgChange: true });
   console.log(publicPostsData, "publicposts");
 
   const displayImagePosts = () => {

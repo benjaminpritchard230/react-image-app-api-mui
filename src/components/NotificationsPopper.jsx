@@ -11,6 +11,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import ReactTimeAgo from "react-time-ago";
+import { useEffect } from "react";
 
 export default function NotificationsPopper({
   handleOpenNotificationsMenu,
@@ -27,7 +28,10 @@ export default function NotificationsPopper({
     isError,
     isLoading,
   } = useGetNotificationsQuery();
-  console.log(notificationsData);
+
+  useEffect(() => {
+    console.log(notificationsData, "notificationsdata");
+  }, [notificationsData]);
 
   const NotificationDisplay = ({ notification }) => {
     return (

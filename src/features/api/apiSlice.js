@@ -12,7 +12,7 @@ export const postsApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Posts", "Auth"],
+  tagTypes: ["Posts", "User"],
   endpoints: (builder) => ({
     getPublicPosts: builder.query({
       query: (page) => `posts/all?page=${page}`,
@@ -74,6 +74,7 @@ export const postsApi = createApi({
         method: "POST",
         body: credentials,
       }),
+      // invalidatesTags: ["Posts", "User", "Notifications"],
     }),
     register: builder.mutation({
       query: (credentials) => ({

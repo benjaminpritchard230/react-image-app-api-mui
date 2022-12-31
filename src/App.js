@@ -52,6 +52,7 @@ function App() {
             page={page}
             followingPosts={followingPosts}
             setFollowingPosts={setFollowingPosts}
+            key={Math.random()}
           />
         </>
       );
