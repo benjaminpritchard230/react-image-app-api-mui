@@ -19,6 +19,11 @@ import { setCredentials } from "../features/auth/authSlice";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { toggleTheme } from "../features/theme/themeSlice";
+import { Badge } from "@mui/material";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import { useState } from "react";
+import NotificationsPopper from "./NotificationsPopper";
+import { useGetNotificationsQuery } from "../features/api/apiSlice";
 
 export default function ResponsiveAppBar() {
   const dispatch = useDispatch();
@@ -27,22 +32,34 @@ export default function ResponsiveAppBar() {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useSelector((state) => state.theme.theme);
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [anchorElNotifications, setAnchorElNotifications] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleOpenNotificationsMenu = (event) => {
+    setAnchorElNotifications(
+      anchorElNotifications ? null : event.currentTarget
+    );
+  };
+
+  const handleCloseNotificationsMenu = () => {
+    setAnchorElNotifications(null);
   };
 
   const handleLogoutClick = () => {
@@ -179,6 +196,19 @@ export default function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+            {token.length > 0 ? (
+              <IconButton
+                sx={{ marginRight: { xs: "3px", md: "20px" } }}
+                size="large"
+                aria-label="show 17 new notifications"
+                color="inherit"
+                onClick={handleOpenNotificationsMenu}
+              >
+                <Badge badgeContent={0} color="error">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+            ) : null}
             <Tooltip title="User settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {token.length > 0 ? (
@@ -253,6 +283,14 @@ export default function ResponsiveAppBar() {
           </Box>
         </Toolbar>
       </Container>
+      {token.length > 0 ? (
+        <NotificationsPopper
+          handleOpenNotificationsMenu={handleOpenNotificationsMenu}
+          handleCloseNotificationsMenu={handleCloseNotificationsMenu}
+          anchorElNotifications={anchorElNotifications}
+          setAnchorElNotifications={setAnchorElNotifications}
+        />
+      ) : null}
     </AppBar>
   );
 }

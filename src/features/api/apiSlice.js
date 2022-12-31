@@ -42,6 +42,10 @@ export const postsApi = createApi({
       query: (id) => `posts/${id}/comments/`,
       providesTags: ["Comments"],
     }),
+    getNotifications: builder.query({
+      query: () => `my_notifications/`,
+      providesTags: ["Notifications"],
+    }),
     like: builder.mutation({
       query: (id) => ({
         url: `posts/${id}/like/`,
@@ -134,6 +138,7 @@ export const {
   useGetUserInfoQuery,
   useGetCurrentUserInfoQuery,
   useGetPostCommentsQuery,
+  useGetNotificationsQuery,
   useLikeMutation,
   useMakePrivateMutation,
   useDeleteMutation,
