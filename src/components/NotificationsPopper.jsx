@@ -67,8 +67,8 @@ export default function NotificationsPopper({
                     variant="body2"
                     color="text.primary"
                   >
-                    {/* <ReactTimeAgo date={Date.parse(notification.timestamp)} /> */}
-                    {notification.unread ? "true" : "false"}
+                    <ReactTimeAgo date={Date.parse(notification.timestamp)} />
+                    {/* {notification.unread ? "true" : "false"} */}
                   </Typography>
                 </React.Fragment>
               }
