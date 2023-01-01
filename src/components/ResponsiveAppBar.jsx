@@ -72,6 +72,13 @@ export default function ResponsiveAppBar() {
     navigate("/");
   };
 
+  const {
+    data: notificationsData,
+    error,
+    isError,
+    isLoading,
+  } = useGetNotificationsQuery();
+
   return (
     <AppBar position="sticky">
       <Container maxWidth="xl">
@@ -209,7 +216,10 @@ export default function ResponsiveAppBar() {
                 color="inherit"
                 onClick={handleOpenNotificationsMenu}
               >
-                <Badge badgeContent={0} color="error">
+                <Badge
+                  badgeContent={!isLoading ? notificationsData.length : 0}
+                  color="error"
+                >
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
