@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Popper from "@mui/material/Popper";
-import { Popover } from "@mui/material";
+import { Popover, Tooltip } from "@mui/material";
 import { useGetNotificationsQuery } from "../features/api/apiSlice";
 import * as React from "react";
 import List from "@mui/material/List";
@@ -46,15 +46,17 @@ export default function NotificationsPopper({
           <ListItem
             alignItems="flex-start"
             secondaryAction={
-              <IconButton
-                edge="end"
-                aria-label="delete"
-                onClick={() => {
-                  markRead(notification.id);
-                }}
-              >
-                <DoneIcon />
-              </IconButton>
+              <Tooltip title="Mark as read">
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => {
+                    markRead(notification.id);
+                  }}
+                >
+                  <DoneIcon />
+                </IconButton>
+              </Tooltip>
             }
           >
             <ListItemText

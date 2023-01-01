@@ -28,7 +28,8 @@ export default function PostCard({ post, isPrivate }) {
   const [commentsDialog, setCommentsDialog] = useState(false);
   const auth = useSelector((state) => state.auth);
   const token = auth.token;
-  const userUrl = `user/${post.user}/`;
+  const userId = auth.id;
+  const userUrl = userId === post.user ? "private" : `user/${post.user}/`;
   const capitalizeString = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };

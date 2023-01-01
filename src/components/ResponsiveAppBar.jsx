@@ -31,6 +31,7 @@ export default function ResponsiveAppBar() {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const token = auth.token;
+  const username = auth.username;
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useSelector((state) => state.theme.theme);
@@ -217,19 +218,23 @@ export default function ResponsiveAppBar() {
 
           <Box sx={{ flexGrow: 0 }}>
             {token.length > 0 ? (
-              <IconButton
-                sx={{ marginRight: { xs: "3px", md: "20px" } }}
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-                onClick={handleOpenNotificationsMenu}
+              <Tooltip
+                title={`You have ${notificationsCount} unread notifications.`}
               >
-                <Badge badgeContent={notificationsCount} color="error">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
+                <IconButton
+                  sx={{ marginRight: { xs: "3px", md: "20px" } }}
+                  size="large"
+                  aria-label="show 17 new notifications"
+                  color="inherit"
+                  onClick={handleOpenNotificationsMenu}
+                >
+                  <Badge badgeContent={notificationsCount} color="error">
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
+              </Tooltip>
             ) : null}
-            <Tooltip title="User settings">
+            <Tooltip title={username ? `User settings for ${username}` : ""}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {token.length > 0 ? (
                   <Avatar
