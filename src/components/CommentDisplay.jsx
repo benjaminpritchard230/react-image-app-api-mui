@@ -29,7 +29,7 @@ export default function CommentDisplay({ comment }) {
         </Grid>
         <Grid justifyContent="left" item xs zeroMinWidth>
           <Stack direction="row" spacing={1}>
-            <Link component={RouterLink} to={`/${userUrl}`} variant="body2">
+            <Link component={RouterLink} to={`/${userUrl}`} variant="body1">
               {capitalizeString(comment.author)}
             </Link>{" "}
             {comment.user === auth.id ? (
