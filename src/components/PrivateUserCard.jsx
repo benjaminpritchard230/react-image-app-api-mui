@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import EditButton from "./EditButton";
 import EditUserProfileDialog from "./EditUserProfileDialog";
 import EditUserAvatarDialog from "./EditUserAvatarDialog";
+import { Tooltip } from "@mui/material";
+
 import { useState } from "react";
 export default function PrivateUserCard() {
   const [editUserProfileDialog, setEditUserProfileDialog] = useState(false);
@@ -30,6 +32,17 @@ export default function PrivateUserCard() {
   const capitalizeString = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
+
+  const followers_names =
+    !isLoading && userInfoData.followers_names.length > 0
+      ? `Followed by ${userInfoData.followers_names.join(", ").toString()}`
+      : "No followers yet";
+
+  const following_names =
+    !isLoading && userInfoData.following_names.length > 0
+      ? `Following ${userInfoData.following_names.join(", ").toString()}`
+      : "Not following anyone yet";
+
   return (
     <>
       <Card
@@ -101,12 +114,16 @@ export default function PrivateUserCard() {
                   ? capitalizeString(userInfoData.about_me)
                   : null}
               </Typography>
-              <Typography variant="h5" component="div">
-                Followers: {userInfoData.followers.length}
-              </Typography>
-              <Typography variant="h5" component="div">
-                Following: {userInfoData.following.length}
-              </Typography>
+              <Tooltip title={followers_names}>
+                <Typography variant="h5" component="div">
+                  Followers: {userInfoData.followers.length}
+                </Typography>
+              </Tooltip>
+              <Tooltip title={following_names}>
+                <Typography variant="h5" component="div">
+                  Following: {userInfoData.following.length}
+                </Typography>
+              </Tooltip>
             </Stack>
           ) : null}
         </CardContent>
