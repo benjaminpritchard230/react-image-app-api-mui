@@ -6,6 +6,7 @@ import Link from "@mui/material/Link";
 import DeleteCommentButton from "./DeleteCommentButton";
 import { Stack } from "@mui/system";
 import { useSelector } from "react-redux";
+import { Chip } from "@mui/material";
 const imgLink =
   "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260";
 
@@ -27,9 +28,14 @@ export default function CommentDisplay({ comment }) {
           <Avatar alt="Remy Sharp" src={imgLink} />
         </Grid>
         <Grid justifyContent="left" item xs zeroMinWidth>
-          <Link component={RouterLink} to={`/${userUrl}`} variant="body2">
-            {capitalizeString(comment.author)}
-          </Link>{" "}
+          <Stack direction="row" spacing={1}>
+            <Link component={RouterLink} to={`/${userUrl}`} variant="body2">
+              {capitalizeString(comment.author)}
+            </Link>{" "}
+            {comment.user === auth.id ? (
+              <Chip label="You" variant="outlined" />
+            ) : null}
+          </Stack>
           <p style={{ textAlign: "left" }}>{comment.body} </p>
           <p style={{ textAlign: "left", color: "gray" }}>
             <ReactTimeAgo date={Date.parse(comment.created_on)} />
