@@ -80,9 +80,16 @@ export default function NotificationsPopper({
     }
   };
 
+  const unreadNotifications = notificationsData
+    ? notificationsData.filter((obj) => obj.unread === true)
+    : 0;
+
   const displayNotifications = () => {
-    if (!isLoading && notificationsData.length > 0) {
-      return notificationsData.map((notification) => (
+    if (notificationsData) {
+      let unreadNotifications = notificationsData.filter(
+        (obj) => obj.unread === true
+      );
+      return unreadNotifications.map((notification) => (
         <NotificationDisplay
           notification={notification}
           key={notification.id}
@@ -117,7 +124,9 @@ export default function NotificationsPopper({
               bgcolor: "background.paper",
             }}
           >
-            {displayNotifications()}
+            {displayNotifications().length > 0
+              ? displayNotifications()
+              : "No notifications yet."}
           </List>
         </Box>
       </Popover>

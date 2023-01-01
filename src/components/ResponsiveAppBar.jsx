@@ -72,12 +72,20 @@ export default function ResponsiveAppBar() {
     navigate("/");
   };
 
-  // const {
-  //   data: notificationsData,
-  //   error,
-  //   isError,
-  //   isLoading,
-  // } = useGetNotificationsQuery();
+  const {
+    data: notificationsData,
+    error,
+    isError,
+    isLoading,
+  } = useGetNotificationsQuery();
+
+  if (notificationsData) {
+    console.log(notificationsData);
+  }
+
+  const notificationsCount = notificationsData
+    ? notificationsData.filter((obj) => obj.unread === true).length
+    : 0;
 
   return (
     <AppBar position="sticky">
@@ -216,11 +224,7 @@ export default function ResponsiveAppBar() {
                 color="inherit"
                 onClick={handleOpenNotificationsMenu}
               >
-                <Badge
-                  // badgeContent={!isLoading ? notificationsData.length : 0}
-                  badgeContent={0}
-                  color="error"
-                >
+                <Badge badgeContent={notificationsCount} color="error">
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
