@@ -12,6 +12,10 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import ReactTimeAgo from "react-time-ago";
 import { useEffect } from "react";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DoneIcon from "@mui/icons-material/Done";
+import { useMarkNotificationReadMutation } from "../features/api/apiSlice";
 
 export default function NotificationsPopper({
   handleOpenNotificationsMenu,
@@ -29,33 +33,51 @@ export default function NotificationsPopper({
     isLoading,
   } = useGetNotificationsQuery();
 
+  const [markRead] = useMarkNotificationReadMutation();
+
   useEffect(() => {
     console.log(notificationsData, "notificationsdata");
   }, [notificationsData]);
 
   const NotificationDisplay = ({ notification }) => {
-    return (
-      <>
-        <ListItem alignItems="flex-start">
-          <ListItemText
-            primary={notification.verb}
-            secondary={
-              <React.Fragment>
-                <Typography
-                  sx={{ display: "inline" }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  <ReactTimeAgo date={Date.parse(notification.timestamp)} />
-                </Typography>
-              </React.Fragment>
+    if (notification.unread === true) {
+      return (
+        <>
+          <ListItem
+            alignItems="flex-start"
+            secondaryAction={
+              <IconButton
+                edge="end"
+                aria-label="delete"
+                onClick={() => {
+                  markRead(notification.id);
+                }}
+              >
+                <DoneIcon />
+              </IconButton>
             }
-          />
-        </ListItem>
-        <Divider component="li" />
-      </>
-    );
+          >
+            <ListItemText
+              primary={notification.verb}
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    sx={{ display: "inline" }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  >
+                    {/* <ReactTimeAgo date={Date.parse(notification.timestamp)} /> */}
+                    {notification.unread ? "true" : "false"}
+                  </Typography>
+                </React.Fragment>
+              }
+            />
+          </ListItem>
+          <Divider component="li" />
+        </>
+      );
+    }
   };
 
   const displayNotifications = () => {

@@ -128,6 +128,14 @@ export const postsApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+    markNotificationRead: builder.mutation({
+      query: (id) => ({
+        url: `my_notifications/${id}/`,
+        method: "PATCH",
+        body: { unread: false },
+      }),
+      invalidatesTags: ["Notifications"],
+    }),
   }),
 });
 
@@ -151,4 +159,5 @@ export const {
   useDeleteCommentMutation,
   useLikeCommentMutation,
   useFollowUserMutation,
+  useMarkNotificationReadMutation,
 } = postsApi;

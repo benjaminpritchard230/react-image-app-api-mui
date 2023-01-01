@@ -72,12 +72,12 @@ export default function ResponsiveAppBar() {
     navigate("/");
   };
 
-  const {
-    data: notificationsData,
-    error,
-    isError,
-    isLoading,
-  } = useGetNotificationsQuery();
+  // const {
+  //   data: notificationsData,
+  //   error,
+  //   isError,
+  //   isLoading,
+  // } = useGetNotificationsQuery();
 
   return (
     <AppBar position="sticky">
@@ -217,7 +217,8 @@ export default function ResponsiveAppBar() {
                 onClick={handleOpenNotificationsMenu}
               >
                 <Badge
-                  badgeContent={!isLoading ? notificationsData.length : 0}
+                  // badgeContent={!isLoading ? notificationsData.length : 0}
+                  badgeContent={0}
                   color="error"
                 >
                   <NotificationsIcon />
