@@ -87,11 +87,11 @@ export default function UserCard({}) {
               {<ReactTimeAgo date={Date.parse(userInfoData.date_joined)} />}
             </Typography>
 
-            <Typography variant="h5" component="div">
-              {userInfoData.about_me
-                ? capitalizeString(userInfoData.about_me)
-                : null}
-            </Typography>
+            {userInfoData.acount_me ? (
+              <Typography variant="h5" component="div">
+                capitalizeString(userInfoData.about_me)
+              </Typography>
+            ) : null}
             <Tooltip title={followers_names} placement="top">
               <Typography variant="h5" component="div">
                 Followers: {userInfoData.followers.length}
