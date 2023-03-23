@@ -1,16 +1,15 @@
+import { Avatar, Tooltip } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import { useGetCurrentUserInfoQuery } from "../features/api/apiSlice";
-import { Stack } from "@mui/system";
-import { Avatar } from "@mui/material";
 import Divider from "@mui/material/Divider";
-import ReactTimeAgo from "react-time-ago";
+import Typography from "@mui/material/Typography";
+import { Stack } from "@mui/system";
 import { useSelector } from "react-redux";
+import ReactTimeAgo from "react-time-ago";
+import { useGetCurrentUserInfoQuery } from "../features/api/apiSlice";
 import EditButton from "./EditButton";
-import EditUserProfileDialog from "./EditUserProfileDialog";
 import EditUserAvatarDialog from "./EditUserAvatarDialog";
-import { Tooltip } from "@mui/material";
+import EditUserProfileDialog from "./EditUserProfileDialog";
 
 import { useState } from "react";
 export default function PrivateUserCard() {
@@ -83,7 +82,7 @@ export default function PrivateUserCard() {
                 mt={2}
               >
                 <Avatar
-                  src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+                  src={`https://escooter230.pythonanywhere.com/${userInfoData.profile_image}`}
                   alt="user-avatar"
                   sx={{ width: 100, height: 100 }}
                 />

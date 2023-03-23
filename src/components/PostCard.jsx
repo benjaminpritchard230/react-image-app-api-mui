@@ -1,21 +1,21 @@
+import { Grid } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import { Grid } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-import { motion } from "framer-motion";
-import Link from "@mui/material/Link";
-import { Link as RouterLink } from "react-router-dom";
-import LikeButton from "./LikeButton";
-import { useSelector } from "react-redux";
-import PostCommentsToggle from "./PostCommentsToggle";
-import { useState } from "react";
-import CommentsDialog from "./CommentsDialog";
-import ReactTimeAgo from "react-time-ago";
 import CardMedia from "@mui/material/CardMedia";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link as RouterLink } from "react-router-dom";
+import ReactTimeAgo from "react-time-ago";
+import CommentsDialog from "./CommentsDialog";
 import DeletePostButton from "./DeletePostButton";
+import LikeButton from "./LikeButton";
+import PostCommentsToggle from "./PostCommentsToggle";
 import TogglePrivateSwitch from "./TogglePrivateSwitch";
 export default function PostCard({ post, isPrivate }) {
   const Item = styled(Paper)(({ theme }) => ({
@@ -60,8 +60,9 @@ export default function PostCard({ post, isPrivate }) {
       <Item sx={{ m: 0.5 }}>
         <Card sx={{ minHeight: 150 }}>
           <CardMedia
+            style={{ height: "300px", width: "auto" }}
             component="img"
-            image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+            image={`https://escooter230.pythonanywhere.com/${post.image_url}`}
             alt="green iguana"
           />
           <CardContent>

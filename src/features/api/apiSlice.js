@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const postsApi = createApi({
   reducerPath: "postsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/",
+    baseUrl: "http://escooter230.pythonanywhere.com/",
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
       if (token) {
